@@ -1,0 +1,7 @@
+container\_collection package
+=============================
+
+.. automodule:: container_collection
+   :members:
+   :undoc-members:
+   :show-inheritance:
