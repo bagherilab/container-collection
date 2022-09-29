@@ -1,2 +1,5 @@
-# container-collection
-Collection of flows and tasks for running containerized models
+[![Build Status](https://github.com/bagherilab/container-collection/workflows/build/badge.svg)](https://github.com/bagherilab/container-collection/actions?query=workflow%3Abuild)
+[![Codecov](https://img.shields.io/codecov/c/gh/bagherilab/container-collection?token=OH8080ZFCU)](https://codecov.io/gh/bagherilab/container-collection)
+[![Lint Status](https://github.com/bagherilab/container-collection/workflows/lint/badge.svg)](https://github.com/bagherilab/container-collection/actions?query=workflow%3Alint)
+[![Documentation](https://github.com/bagherilab/container-collection/workflows/documentation/badge.svg)](https://bagherilab.github.io/container-collection/)
+[![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
