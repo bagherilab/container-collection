@@ -7,3 +7,15 @@ class TemplateContainer:
 
     def __str__(self):
         return f" {'TEMPLATE':<10} : {self.name}"
+
+
+from dataclasses import dataclass
+
+
+@dataclass
+class TemplateContainer:
+    """Container for loaded template file."""
+
+    name: str
+
+    contents: str
