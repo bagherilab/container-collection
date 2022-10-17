@@ -2,7 +2,6 @@ from time import sleep
 from typing import Union
 
 import boto3
-
 import prefect
 from prefect import task
 from prefect.states import State
