@@ -35,7 +35,9 @@ def convert_to_dictionary(manifest: pd.DataFrame) -> dict:
 
     for key, group in manifest.groupby("KEY"):
         converted = group.to_dict("records")
-        manifest_dict[key] = {x["EXTENSION"]: x["LOCATION"] for x in converted}
+        manifest_dict[key] = {
+            x["EXTENSION"]: {"location": x["LOCATION"], "key": x["FULL_KEY"]} for x in converted
+        }
 
     return manifest_dict
 
