@@ -1,2 +1,3 @@
+from .filter_manifest_files import filter_manifest_files
 from .find_missing_conditions import find_missing_conditions
 from .update_manifest_contents import update_manifest_contents
