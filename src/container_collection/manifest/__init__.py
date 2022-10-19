@@ -1,0 +1,1 @@
+from .update_manifest_contents import update_manifest_contents
