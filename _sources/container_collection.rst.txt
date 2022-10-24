@@ -5,3 +5,12 @@ container\_collection package
    :members:
    :undoc-members:
    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   container_collection.docker
+   container_collection.jobs

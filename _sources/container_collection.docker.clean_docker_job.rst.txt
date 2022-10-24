@@ -1,0 +1,7 @@
+container\_collection.docker.clean\_docker\_job module
+======================================================
+
+.. automodule:: container_collection.docker.clean_docker_job
+   :members:
+   :undoc-members:
+   :show-inheritance:
