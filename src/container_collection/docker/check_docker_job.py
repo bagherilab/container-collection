@@ -1,7 +1,6 @@
 from typing import Union
 
 import docker
-
 import prefect
 from prefect import task
 from prefect.orion.schemas.states import State, Failed
