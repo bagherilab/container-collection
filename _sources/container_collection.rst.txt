@@ -12,5 +12,6 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   container_collection.batch
    container_collection.docker
    container_collection.jobs

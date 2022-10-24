@@ -1,0 +1,7 @@
+container\_collection.batch.submit\_batch\_job module
+=====================================================
+
+.. automodule:: container_collection.batch.submit_batch_job
+   :members:
+   :undoc-members:
+   :show-inheritance:

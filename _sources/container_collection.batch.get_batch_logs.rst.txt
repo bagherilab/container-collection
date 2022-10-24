@@ -1,0 +1,7 @@
+container\_collection.batch.get\_batch\_logs module
+===================================================
+
+.. automodule:: container_collection.batch.get_batch_logs
+   :members:
+   :undoc-members:
+   :show-inheritance:
