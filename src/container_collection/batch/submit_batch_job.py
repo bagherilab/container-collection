@@ -13,7 +13,7 @@ def submit_batch_job(
     }
 
     if size > 1:
-        job_submission["arrayProperties"] = {"size": size}
+        job_submission["arrayProperties"] = {"size": size}  # type: ignore
 
     client = boto3.client("batch")
     response = client.submit_job(**job_submission)

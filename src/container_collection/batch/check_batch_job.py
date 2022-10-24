@@ -4,15 +4,14 @@ from typing import Union
 import boto3
 import prefect
 from prefect import task
-from prefect.states import State
-from prefect.orion.schemas.states import Failed
+from prefect.orion.schemas.states import State, Failed
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
 
 
 @task
 def check_batch_job(job_arn: str, max_retries: int) -> Union[int, State]:
-    task_run = prefect.context.get_run_context().task_run
+    task_run = prefect.context.get_run_context().task_run  # type: ignore
 
     if task_run.run_count > max_retries:
         return RETRIES_EXCEEDED_EXIT_CODE
