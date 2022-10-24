@@ -14,4 +14,5 @@ Subpackages
 
    container_collection.batch
    container_collection.docker
-   container_collection.jobs
+   container_collection.manifest
+   container_collection.template

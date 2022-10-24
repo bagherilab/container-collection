@@ -1,0 +1,7 @@
+container\_collection.manifest.filter\_manifest\_files module
+=============================================================
+
+.. automodule:: container_collection.manifest.filter_manifest_files
+   :members:
+   :undoc-members:
+   :show-inheritance:

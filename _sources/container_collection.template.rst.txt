@@ -1,0 +1,15 @@
+container\_collection.template package
+======================================
+
+.. automodule:: container_collection.template
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   container_collection.template.generate_input_contents
