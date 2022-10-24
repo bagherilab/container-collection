@@ -11,7 +11,7 @@ RETRIES_EXCEEDED_EXIT_CODE = 80
 
 @task
 def check_docker_job(container_id: str, max_retries: int) -> Union[int, State]:
-    task_run = prefect.context.get_run_context().task_run # type: ignore
+    task_run = prefect.context.get_run_context().task_run  # type: ignore
 
     if task_run.run_count > max_retries:
         return RETRIES_EXCEEDED_EXIT_CODE
