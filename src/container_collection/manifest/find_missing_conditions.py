@@ -3,7 +3,9 @@ import pandas as pd
 
 
 @task
-def find_missing_conditions(conditions, seeds, extensions, manifest: pd.DataFrame):
+def find_missing_conditions(
+    conditions: dict, seeds: list[int], extensions: list[str], manifest: pd.DataFrame
+) -> list[dict]:
     missing_conditions = []
 
     for condition in conditions:
