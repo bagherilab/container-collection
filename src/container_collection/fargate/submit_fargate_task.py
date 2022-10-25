@@ -7,7 +7,7 @@ from prefect.blocks.system import Secret
 def submit_fargate_task(
     name: str, task_definition_arn: str, user: str, cluster: str, command: list[str]
 ) -> list[str]:
-    securityGroups = Secret.load("aws-security-groups").get().split(":")
+    security_groups = Secret.load("aws-security-groups").get().split(":")
     subnets = Secret.load("aws-subnets").get().split(":")
 
     task_submission = {
@@ -23,7 +23,7 @@ def submit_fargate_task(
             "awsvpcConfiguration": {
                 "subnets": subnets,
                 "assignPublicIp": "ENABLED",
-                "securityGroups": securityGroups,
+                "securityGroups": security_groups,
             }
         },
         "overrides": {"containerOverrides": [{"name": f"{user}_{name}", "command": command}]},
