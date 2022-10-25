@@ -1,0 +1,7 @@
+container\_collection.fargate.submit\_fargate\_task module
+==========================================================
+
+.. automodule:: container_collection.fargate.submit_fargate_task
+   :members:
+   :undoc-members:
+   :show-inheritance:
