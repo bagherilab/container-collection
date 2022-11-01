@@ -1,12 +1,16 @@
 from prefect import task
-from prefect.blocks.system import Secret
 
 
 @task
-def make_fargate_task(name: str, image: str, user: str, vcpus: int, memory: int) -> dict:
-    account = Secret.load("aws-account").get()
-    region = Secret.load("aws-region").get()
-
+def make_fargate_task(
+    name: str,
+    image: str,
+    account: str,
+    region: str,
+    user: str,
+    vcpus: int,
+    memory: int,
+) -> dict:
     return {
         "containerDefinitions": [
             {

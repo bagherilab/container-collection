@@ -1,12 +1,17 @@
 from prefect import task
-from prefect.blocks.system import Secret
 
 
 @task
-def make_batch_job(name: str, image: str, user: str, vcpus: int, memory: int, prefix: str) -> dict:
-    account = Secret.load("aws-account").get()
-    region = Secret.load("aws-region").get()
-
+def make_batch_job(
+    name: str,
+    image: str,
+    account: str,
+    region: str,
+    user: str,
+    vcpus: int,
+    memory: int,
+    prefix: str,
+) -> dict:
     return {
         "jobDefinitionName": f"{user}_{name}",
         "type": "container",
