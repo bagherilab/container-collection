@@ -8,7 +8,7 @@ from prefect import task
 def run_docker_command(
     image: str,
     command: list[str],
-    volume: Optional[docker.models.volumes.Volume],
+    volume: Optional[docker.models.volumes.Volume] = None,
     environment: Optional[list] = None,
 ) -> None:
     environment = [] if environment is None else environment
