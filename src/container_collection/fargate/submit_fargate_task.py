@@ -1,15 +1,17 @@
 import boto3
 from prefect import task
-from prefect.blocks.system import Secret
 
 
 @task
 def submit_fargate_task(
-    name: str, task_definition_arn: str, user: str, cluster: str, command: list[str]
+    name: str,
+    task_definition_arn: str,
+    user: str,
+    cluster: str,
+    security_groups: list[str],
+    subnets: list[str],
+    command: list[str],
 ) -> list[str]:
-    security_groups = Secret.load("aws-security-groups").get().split(":")
-    subnets = Secret.load("aws-subnets").get().split(":")
-
     task_submission = {
         "taskDefinition": task_definition_arn,
         "capacityProviderStrategy": [
