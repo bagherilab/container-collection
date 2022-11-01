@@ -1,0 +1,7 @@
+container\_collection.docker.remove\_docker\_volume module
+==========================================================
+
+.. automodule:: container_collection.docker.remove_docker_volume
+   :members:
+   :undoc-members:
+   :show-inheritance:
