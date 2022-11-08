@@ -1,5 +1,7 @@
 import unittest
-from container_collection.manifest.update_manifest_contents import update_manifest_contents
+from container_collection.manifest.update_manifest_contents import (
+    update_manifest_contents,
+)
 import pandas as pd
 
 
@@ -80,7 +82,9 @@ class TestUpdateManifestContents(unittest.TestCase):
         actual = update_manifest_contents.fn(location_keys)
         self.assertTrue(expected.equals(actual))
 
-    def test_update_manifest_contents_single_location_populated_key_list_no_directories(self,):
+    def test_update_manifest_contents_single_location_populated_key_list_no_directories(
+        self,
+    ):
         key_list = ["key_1.extension_a", "key_2.extension_b", "key_3.extension_a"]
         location_keys = {"s3://bucket-name": key_list}
         contents = [
