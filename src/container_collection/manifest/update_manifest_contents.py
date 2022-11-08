@@ -30,6 +30,8 @@ def make_file_manifest(location: str, keys: list[str]) -> pd.DataFrame:
         extension = ".".join(os.path.split(key)[1].split(".")[1:])
         contents.append((short_key, extension, location, key))
 
-    manifest = pd.DataFrame(contents, columns=["KEY", "EXTENSION", "LOCATION", "FULL_KEY"])
+    manifest = pd.DataFrame(
+        contents, columns=["KEY", "EXTENSION", "LOCATION", "FULL_KEY"]
+    )
 
     return manifest
