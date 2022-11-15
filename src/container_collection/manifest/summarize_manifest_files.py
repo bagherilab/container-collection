@@ -7,9 +7,9 @@ import pandas as pd
 
 @task
 def summarize_manifest_files(
-    manifest: pd.DataFrame, name: str, conditions: dict, seeds: list[str]
+    manifest: pd.DataFrame, name: str, conditions: list[dict], seeds: list[str]
 ) -> str:
-    condition_keys = [condition["key"] for condition in conditions]
+    condition_keys = [f"{name}_{condition['key']}" for condition in conditions]
     manifest_keys = manifest.set_index("KEY").filter(regex=f"^{name}", axis="index").reset_index()
     extensions = manifest_keys["EXTENSION"].unique()
 
@@ -20,10 +20,10 @@ def summarize_manifest_files(
         key = entry["KEY"]
         extension = entry["EXTENSION"]
 
-        match = re.search("_[0-9]{4}", key)
+        match = re.search("[0-9]{4}", key)
         if match:
-            key = entry["KEY"].replace(match.group(0), "")
-            if key in condition_keys:
+            key = entry["KEY"].replace(f"_{match.group(0)}", "")
+            if key in condition_keys and int(match.group(0)) in seeds:
                 counts.loc[key][extension] += 1
                 count = counts.loc[key][extension]
                 percent = count / len(seeds) * 100
