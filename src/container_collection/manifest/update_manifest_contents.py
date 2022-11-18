@@ -12,6 +12,9 @@ def update_manifest_contents(location_keys: dict) -> pd.DataFrame:
         location_manifest = make_file_manifest(location, keys)
         all_manifests.append(location_manifest)
 
+    if len(all_manifests) == 0:
+        return pd.DataFrame(columns=["KEY", "EXTENSION", "LOCATION", "FULL_KEY"])
+
     manifest = pd.concat(all_manifests)
     manifest.sort_values(by=["EXTENSION", "KEY"], inplace=True)
     manifest.reset_index(drop=True, inplace=True)
