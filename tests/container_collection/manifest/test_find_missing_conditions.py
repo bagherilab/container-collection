@@ -242,3 +242,144 @@ class TestFindMissingConditions(unittest.TestCase):
             extensions=self.extensions,
         )
         self.assertEqual(expected_missing, actual_missing)
+
+    def test_find_missing_conditions_contains_missing_and_incomplete_conditions_with_unspecified_names(
+        self,
+    ):
+        manifest_keys = [
+            "name_key_A_0001",
+            "name2_key_A_0001",
+            "name_key_A_0002",
+            "name_key_A_0002",
+            "name_key_B_0000",
+            "name_key_B_0000",
+            "name_key_B_0002",
+            "name_key_C_0000",
+            "name2_key_C_0000",
+            "name_key_C_0001",
+            "name_key_C_0001",
+        ]
+        manifest_extensions = [
+            "extension_a",
+            "extension_a",
+            "extension_a",
+            "extension_b",
+            "extension_a",
+            "extension_b",
+            "extension_b",
+            "extension_b",
+            "extension_b",
+            "extension_a",
+            "extension_b",
+        ]
+        manifest = pd.DataFrame(data={"KEY": manifest_keys, "EXTENSION": manifest_extensions})
+        expected_missing = [
+            {"key": "key_A", "seed": 0},
+            {"key": "key_A", "seed": 1},
+            {"key": "key_B", "seed": 1},
+            {"key": "key_B", "seed": 2},
+            {"key": "key_C", "seed": 2},
+            {"key": "key_C", "seed": 0},
+        ]
+        actual_missing = find_missing_conditions.fn(
+            manifest=manifest,
+            name=self.name,
+            conditions=self.conditions_no_attributes,
+            seeds=self.seeds,
+            extensions=self.extensions,
+        )
+        self.assertEqual(expected_missing, actual_missing)
+
+    def test_find_missing_conditions_contains_missing_and_incomplete_conditions_with_unspecified_conditions(
+        self,
+    ):
+        manifest_keys = [
+            "name_key_A_0001",
+            "name_key_D_0001",
+            "name_key_A_0002",
+            "name_key_A_0002",
+            "name_key_B_0000",
+            "name_key_B_0000",
+            "name_key_B_0002",
+            "name_key_C_0000",
+            "name_key_D_0000",
+            "name_key_C_0001",
+            "name_key_C_0001",
+        ]
+        manifest_extensions = [
+            "extension_a",
+            "extension_a",
+            "extension_a",
+            "extension_b",
+            "extension_a",
+            "extension_b",
+            "extension_b",
+            "extension_b",
+            "extension_b",
+            "extension_a",
+            "extension_b",
+        ]
+        manifest = pd.DataFrame(data={"KEY": manifest_keys, "EXTENSION": manifest_extensions})
+        expected_missing = [
+            {"key": "key_A", "seed": 0},
+            {"key": "key_A", "seed": 1},
+            {"key": "key_B", "seed": 1},
+            {"key": "key_B", "seed": 2},
+            {"key": "key_C", "seed": 2},
+            {"key": "key_C", "seed": 0},
+        ]
+        actual_missing = find_missing_conditions.fn(
+            manifest=manifest,
+            name=self.name,
+            conditions=self.conditions_no_attributes,
+            seeds=self.seeds,
+            extensions=self.extensions,
+        )
+        self.assertEqual(expected_missing, actual_missing)
+
+    def test_find_missing_conditions_contains_missing_and_incomplete_conditions_with_unspecified_seeds(
+        self,
+    ):
+        manifest_keys = [
+            "name_key_A_0001",
+            "name_key_A_0006",
+            "name_key_A_0002",
+            "name_key_A_0002",
+            "name_key_B_0000",
+            "name_key_B_0000",
+            "name_key_B_0002",
+            "name_key_C_0000",
+            "name_key_C_0006",
+            "name_key_C_0001",
+            "name_key_C_0001",
+        ]
+        manifest_extensions = [
+            "extension_a",
+            "extension_a",
+            "extension_a",
+            "extension_b",
+            "extension_a",
+            "extension_b",
+            "extension_b",
+            "extension_b",
+            "extension_b",
+            "extension_a",
+            "extension_b",
+        ]
+        manifest = pd.DataFrame(data={"KEY": manifest_keys, "EXTENSION": manifest_extensions})
+        expected_missing = [
+            {"key": "key_A", "seed": 0},
+            {"key": "key_A", "seed": 1},
+            {"key": "key_B", "seed": 1},
+            {"key": "key_B", "seed": 2},
+            {"key": "key_C", "seed": 2},
+            {"key": "key_C", "seed": 0},
+        ]
+        actual_missing = find_missing_conditions.fn(
+            manifest=manifest,
+            name=self.name,
+            conditions=self.conditions_no_attributes,
+            seeds=self.seeds,
+            extensions=self.extensions,
+        )
+        self.assertEqual(expected_missing, actual_missing)
