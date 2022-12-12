@@ -4,12 +4,16 @@ import pandas as pd
 
 @task
 def find_missing_conditions(
-    conditions: dict, seeds: list[int], extensions: list[str], manifest: pd.DataFrame
+    manifest: pd.DataFrame,
+    name: str,
+    conditions: list[dict],
+    seeds: list[int],
+    extensions: list[str],
 ) -> list[dict]:
     missing_conditions = []
 
     for condition in conditions:
-        all_keys = {f"{condition['key']}_{seed:04}": seed for seed in seeds}
+        all_keys = {f"{name}_{condition['key']}_{seed:04}": seed for seed in seeds}
         manifest_keys = manifest[manifest["KEY"].isin(all_keys.keys())]
 
         missing_keys = set(all_keys) - set(manifest_keys["KEY"].unique())
