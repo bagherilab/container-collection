@@ -1,5 +1,5 @@
-from prefect import task
 import pandas as pd
+from prefect import task
 
 
 @task

@@ -1,5 +1,5 @@
+from jinja2 import StrictUndefined, Template
 from prefect import task
-from jinja2 import Template, StrictUndefined
 
 
 @task

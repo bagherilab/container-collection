@@ -3,7 +3,7 @@ from typing import Union
 import docker
 import prefect
 from prefect import task
-from prefect.orion.schemas.states import State, Failed
+from prefect.orion.schemas.states import Failed, State
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
 

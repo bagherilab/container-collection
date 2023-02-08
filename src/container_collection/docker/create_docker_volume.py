@@ -1,5 +1,5 @@
-from prefect import task
 import docker
+from prefect import task
 
 
 @task

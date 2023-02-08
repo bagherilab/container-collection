@@ -1,8 +1,8 @@
 import unittest
-from container_collection.manifest.update_manifest_contents import (
-    update_manifest_contents,
-)
+
 import pandas as pd
+
+from container_collection.manifest.update_manifest_contents import update_manifest_contents
 
 
 class TestUpdateManifestContents(unittest.TestCase):

@@ -1,6 +1,6 @@
 import boto3
-from prefect import task
 from deepdiff import DeepDiff
+from prefect import task
 
 
 @task
