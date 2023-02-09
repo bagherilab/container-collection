@@ -1,6 +1,8 @@
 import unittest
-from container_collection.manifest.find_missing_conditions import find_missing_conditions
+
 import pandas as pd
+
+from container_collection.manifest.find_missing_conditions import find_missing_conditions
 
 
 class TestFindMissingConditions(unittest.TestCase):

@@ -1,8 +1,8 @@
 import re
 
+import pandas as pd
 from prefect import task
 from tabulate import tabulate
-import pandas as pd
 
 
 @task

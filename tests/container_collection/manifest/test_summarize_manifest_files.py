@@ -1,7 +1,9 @@
 import unittest
-from container_collection.manifest.summarize_manifest_files import summarize_manifest_files
-from tabulate import tabulate
+
 import pandas as pd
+from tabulate import tabulate
+
+from container_collection.manifest.summarize_manifest_files import summarize_manifest_files
 
 
 class TestSummarizeManifestFiles(unittest.TestCase):

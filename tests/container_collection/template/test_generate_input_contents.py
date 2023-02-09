@@ -1,8 +1,8 @@
 import unittest
-from container_collection.template.generate_input_contents import (
-    generate_input_contents,
-)
+
 from jinja2.exceptions import UndefinedError
+
+from container_collection.template.generate_input_contents import generate_input_contents
 
 
 class TestGenerateInputContents(unittest.TestCase):
