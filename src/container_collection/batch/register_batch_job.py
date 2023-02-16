@@ -4,7 +4,7 @@ from prefect import task
 
 
 @task
-def register_batch_job(job_definition: dict) -> None:
+def register_batch_job(job_definition: dict) -> str:
     client = boto3.client("batch")
 
     response = client.describe_job_definitions(

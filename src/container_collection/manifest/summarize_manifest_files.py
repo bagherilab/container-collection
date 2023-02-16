@@ -7,7 +7,7 @@ from tabulate import tabulate
 
 @task
 def summarize_manifest_files(
-    manifest: pd.DataFrame, name: str, conditions: list[dict], seeds: list[str]
+    manifest: pd.DataFrame, name: str, conditions: list[dict], seeds: list[int]
 ) -> str:
     condition_keys = [f"{name}_{condition['key']}" for condition in conditions]
     manifest_keys = manifest.set_index("KEY").filter(regex=f"^{name}", axis="index").reset_index()
