@@ -4,7 +4,7 @@ from typing import Union
 import boto3
 import prefect
 from prefect import task
-from prefect.orion.schemas.states import Failed, State
+from prefect.server.schemas.states import Failed, State
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
 
