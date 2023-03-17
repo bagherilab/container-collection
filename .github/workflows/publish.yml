@@ -8,7 +8,7 @@ on:
       - closed
 
 jobs:
-  release:
+  publish:
     if: ${{ (startsWith(github.event.pull_request.head.ref, 'release/')) && (github.event.pull_request.merged == true) }}
 
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
     steps:
 
     - name: Checkout the repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Extract version from branch name
       run: |
@@ -46,6 +46,10 @@ jobs:
               {
                 "title": "## 📓 Documentation",
                 "labels": ["type: docs"]
+              },
+              {
+                "title": "## 📁 Admin",
+                "labels": ["type: admin"]
               }
             ],
             "template": "#{{CHANGELOG}}---\n\n**Full Changelog**: https://github.com/${{ github.repository }}/compare/#{{FROM_TAG}}...${{ env.RELEASE_VERSION }}\n",
@@ -64,7 +68,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.9
 
