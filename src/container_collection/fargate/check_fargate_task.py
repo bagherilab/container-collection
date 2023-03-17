@@ -3,13 +3,11 @@ from typing import Union
 
 import boto3
 import prefect
-from prefect import task
 from prefect.server.schemas.states import Failed, State
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
 
 
-@task
 def check_fargate_task(cluster: str, task_arn: str, max_retries: int) -> Union[int, State]:
     task_run = prefect.context.get_run_context().task_run  # type: ignore
 

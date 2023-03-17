@@ -1,8 +1,6 @@
 import boto3
-from prefect import task
 
 
-@task
 def submit_batch_job(
     name: str, job_definition_arn: str, user: str, queue: str, size: int
 ) -> list[str]:

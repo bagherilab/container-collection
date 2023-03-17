@@ -1,7 +1,3 @@
-from prefect import task
-
-
-@task
 def make_fargate_task(
     name: str,
     image: str,

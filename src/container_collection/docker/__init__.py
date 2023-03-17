@@ -1,9 +1,14 @@
-from .check_docker_job import check_docker_job
-from .clean_docker_job import clean_docker_job
-from .create_docker_volume import create_docker_volume
-from .get_docker_logs import get_docker_logs
-from .make_docker_job import make_docker_job
-from .remove_docker_volume import remove_docker_volume
-from .run_docker_command import run_docker_command
-from .submit_docker_job import submit_docker_job
-from .terminate_docker_job import terminate_docker_job
+import importlib
+import os
+import sys
+
+from prefect import task
+
+for module_file in os.listdir(os.path.dirname(__file__)):
+    if module_file == "__init__.py" or not module_file.endswith(".py"):
+        continue
+
+    module_name = module_file.replace(".py", "")
+
+    module = importlib.import_module(f".{module_name}", package=__name__)
+    setattr(sys.modules[__name__], module_name, task(getattr(module, module_name)))

@@ -1,11 +1,9 @@
 import re
 
 import pandas as pd
-from prefect import task
 from tabulate import tabulate
 
 
-@task
 def summarize_manifest_files(
     manifest: pd.DataFrame, name: str, conditions: list[dict], seeds: list[int]
 ) -> str:
