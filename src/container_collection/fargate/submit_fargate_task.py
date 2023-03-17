@@ -1,8 +1,6 @@
 import boto3
-from prefect import task
 
 
-@task
 def submit_fargate_task(
     name: str,
     task_definition_arn: str,

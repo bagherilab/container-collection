@@ -1,9 +1,7 @@
 import boto3
 from deepdiff import DeepDiff
-from prefect import task
 
 
-@task
 def register_batch_job(job_definition: dict) -> str:
     client = boto3.client("batch")
 

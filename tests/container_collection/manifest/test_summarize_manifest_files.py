@@ -59,7 +59,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -110,7 +110,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -153,7 +153,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -194,7 +194,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -251,7 +251,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -292,7 +292,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -333,7 +333,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
@@ -374,7 +374,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
         expected_summary = tabulate(
             expected_summary_frame, headers="keys", tablefmt="mixed_outline"
         )
-        actual_summary = summarize_manifest_files.fn(
+        actual_summary = summarize_manifest_files(
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)

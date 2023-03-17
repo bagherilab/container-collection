@@ -2,13 +2,11 @@ from typing import Union
 
 import docker
 import prefect
-from prefect import task
 from prefect.server.schemas.states import Failed, State
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
 
 
-@task
 def check_docker_job(container_id: str, max_retries: int) -> Union[int, State]:
     task_run = prefect.context.get_run_context().task_run  # type: ignore
 

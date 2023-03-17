@@ -1,6 +1,14 @@
-from .check_batch_job import check_batch_job
-from .get_batch_logs import get_batch_logs
-from .make_batch_job import make_batch_job
-from .register_batch_job import register_batch_job
-from .submit_batch_job import submit_batch_job
-from .terminate_batch_job import terminate_batch_job
+import importlib
+import os
+import sys
+
+from prefect import task
+
+for module_file in os.listdir(os.path.dirname(__file__)):
+    if module_file == "__init__.py" or not module_file.endswith(".py"):
+        continue
+
+    module_name = module_file.replace(".py", "")
+
+    module = importlib.import_module(f".{module_name}", package=__name__)
+    setattr(sys.modules[__name__], module_name, task(getattr(module, module_name)))

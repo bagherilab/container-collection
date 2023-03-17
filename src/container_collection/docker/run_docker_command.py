@@ -1,10 +1,8 @@
 from typing import Optional
 
 import docker
-from prefect import task
 
 
-@task
 def run_docker_command(
     image: str,
     command: list[str],

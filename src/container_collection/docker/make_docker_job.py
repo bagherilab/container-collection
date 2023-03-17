@@ -1,7 +1,3 @@
-from prefect import task
-
-
-@task
 def make_docker_job(name: str, image: str, index: int) -> dict:
     return {
         "image": image,

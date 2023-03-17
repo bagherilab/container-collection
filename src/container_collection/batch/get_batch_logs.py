@@ -1,8 +1,6 @@
 import boto3
-from prefect import task
 
 
-@task
 def get_batch_logs(job_arn: str, log_filter: str) -> str:
     client = boto3.client("batch")
     response = client.describe_jobs(jobs=[job_arn])["jobs"][0]

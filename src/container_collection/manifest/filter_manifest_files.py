@@ -1,10 +1,8 @@
 from fnmatch import fnmatch
 
 import pandas as pd
-from prefect import task
 
 
-@task
 def filter_manifest_files(
     manifest: pd.DataFrame,
     extensions: list[str],

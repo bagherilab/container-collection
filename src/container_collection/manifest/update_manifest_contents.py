@@ -1,10 +1,8 @@
 import os
 
 import pandas as pd
-from prefect import task
 
 
-@task
 def update_manifest_contents(location_keys: dict) -> pd.DataFrame:
     all_manifests = []
 

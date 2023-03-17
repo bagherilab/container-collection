@@ -1,7 +1,3 @@
-from prefect import task
-
-
-@task
 def make_batch_job(
     name: str,
     image: str,
