@@ -9,7 +9,7 @@ class TestGenerateInputContents(unittest.TestCase):
     def test_generate_input_conditions_single_condition_template_single_condition_dict_success(
         self,
     ):
-        actual_rendered = generate_input_contents.fn(
+        actual_rendered = generate_input_contents(
             "Lorem ipsum {{condition_a}}", [{"condition_a": "This is condition A!"}]
         )
         expected = ["Lorem ipsum This is condition A!"]
@@ -18,7 +18,7 @@ class TestGenerateInputContents(unittest.TestCase):
     def test_generate_input_conditions_double_condition_template_double_condition_dict_success(
         self,
     ):
-        actual_rendered = generate_input_contents.fn(
+        actual_rendered = generate_input_contents(
             "Lorem ipsum {{condition_a}} {{condition_b}}",
             [
                 {
@@ -33,7 +33,7 @@ class TestGenerateInputContents(unittest.TestCase):
     def test_generate_input_conditions_single_condition_template_two_single_condition_dicts_success(
         self,
     ):
-        actual_rendered = generate_input_contents.fn(
+        actual_rendered = generate_input_contents(
             "Lorem ipsum {{condition_a}}",
             [
                 {"condition_a": "This is condition A!"},
@@ -49,7 +49,7 @@ class TestGenerateInputContents(unittest.TestCase):
     def test_generate_input_conditions_single_condition_template_double_condition_dict_success(
         self,
     ):
-        actual_rendered = generate_input_contents.fn(
+        actual_rendered = generate_input_contents(
             "Lorem ipsum {{condition_a}}",
             [
                 {
@@ -65,7 +65,7 @@ class TestGenerateInputContents(unittest.TestCase):
         self,
     ):
         with self.assertRaises(UndefinedError):
-            generate_input_contents.fn(
+            generate_input_contents(
                 "Lorem ipsum {{condition_a}} {{condition_b}}",
                 [{"condition_a": "This is condition A!"}],
             )

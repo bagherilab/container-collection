@@ -55,7 +55,7 @@ class TestFindMissingConditions(unittest.TestCase):
         ]
         manifest = pd.DataFrame(data={"KEY": manifest_keys, "EXTENSION": manifest_extensions})
         expected_missing = []
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
@@ -99,7 +99,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_B", "seed": 1},
             {"key": "key_C", "seed": 2},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
@@ -149,7 +149,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_B", "seed": 2},
             {"key": "key_C", "seed": 1},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
@@ -190,7 +190,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_C", "seed": 2},
             {"key": "key_C", "seed": 0},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
@@ -236,7 +236,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_C", "seed": 2, "attribute": "c"},
             {"key": "key_C", "seed": 0, "attribute": "c"},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=conditions_with_attributes,
@@ -283,7 +283,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_C", "seed": 2},
             {"key": "key_C", "seed": 0},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
@@ -330,7 +330,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_C", "seed": 2},
             {"key": "key_C", "seed": 0},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
@@ -377,7 +377,7 @@ class TestFindMissingConditions(unittest.TestCase):
             {"key": "key_C", "seed": 2},
             {"key": "key_C", "seed": 0},
         ]
-        actual_missing = find_missing_conditions.fn(
+        actual_missing = find_missing_conditions(
             manifest=manifest,
             name=self.name,
             conditions=self.conditions_no_attributes,
