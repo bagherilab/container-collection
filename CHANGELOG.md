@@ -1,3 +1,12 @@
+# [v0.5.0](https://github.com/bagherilab/container-collection/releases/tag/v0.5.0) - 2023-03-18
+
+> Compare with [v0.4.8](https://github.com/bagherilab/container-collection/compare/v0.4.8...v0.5.0)
+
+### Admin
+
+- Move prefect task decorator to init by [@jessicasyu](https://github.com/jessicasyu) in [#41](https://github.com/bagherilab/container-collection/pull/41)
+- Add changelog and update actions by [@jessicasyu](https://github.com/jessicasyu) in [#42](https://github.com/bagherilab/container-collection/pull/42)
+
 # [v0.4.8](https://github.com/bagherilab/container-collection/releases/tag/v0.4.8) - 2023-02-22
 
 > Compare with [v0.4.7](https://github.com/bagherilab/container-collection/compare/v0.4.7...v0.4.8)
