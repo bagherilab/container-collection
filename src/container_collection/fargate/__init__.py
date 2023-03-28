@@ -1,14 +1,23 @@
 import importlib
-import os
 import sys
 
 from prefect import task
 
-for module_file in os.listdir(os.path.dirname(__file__)):
-    if "__" in module_file or not module_file.endswith(".py"):
-        continue
+from .check_fargate_task import check_fargate_task
+from .make_fargate_task import make_fargate_task
+from .register_fargate_task import register_fargate_task
+from .submit_fargate_task import submit_fargate_task
+from .terminate_fargate_task import terminate_fargate_task
 
-    module_name = module_file.replace(".py", "")
+TASK_MODULES = [
+    check_fargate_task,
+    make_fargate_task,
+    register_fargate_task,
+    submit_fargate_task,
+    terminate_fargate_task,
+]
 
-    module = importlib.import_module(f".{module_name}", package=__name__)
-    setattr(sys.modules[__name__], module_name, task(getattr(module, module_name)))
+for task_module in TASK_MODULES:
+    MODULE_NAME = task_module.__name__
+    module = importlib.import_module(f".{MODULE_NAME}", package=__name__)
+    setattr(sys.modules[__name__], MODULE_NAME, task(getattr(module, MODULE_NAME)))
