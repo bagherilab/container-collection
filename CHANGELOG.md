@@ -1,3 +1,15 @@
+# [v0.5.1](https://github.com/bagherilab/container-collection/releases/tag/v0.5.1) - 2023-03-28
+
+> Compare with [v0.5.0](https://github.com/bagherilab/container-collection/compare/v0.5.0...v0.5.1)
+
+### Bug fixes
+
+- Fix init import to exclude all double underscore files by [@jessicasyu](https://github.com/jessicasyu) in [#44](https://github.com/bagherilab/container-collection/pull/44)
+
+### Admin
+
+- Update adding task decorator to init imports by [@jessicasyu](https://github.com/jessicasyu) in [#45](https://github.com/bagherilab/container-collection/pull/45)
+
 # [v0.5.0](https://github.com/bagherilab/container-collection/releases/tag/v0.5.0) - 2023-03-18
 
 > Compare with [v0.4.8](https://github.com/bagherilab/container-collection/compare/v0.4.8...v0.5.0)
