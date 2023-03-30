@@ -57,11 +57,11 @@ namespace_packages = true
 
 [[tool.mypy.overrides]]
 module = [
-    "boto3",
-    "deepdiff",
-    "docker",
-    "pandas",
-    "tabulate",
+    "boto3.*",
+    "deepdiff.*",
+    "docker.*",
+    "pandas.*",
+    "tabulate.*",
 ]
 ignore_missing_imports = true
 
