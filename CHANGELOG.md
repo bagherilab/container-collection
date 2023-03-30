@@ -1,3 +1,12 @@
+# [v0.5.2](https://github.com/bagherilab/container-collection/releases/tag/v0.5.2) - 2023-03-30
+
+> Compare with [v0.5.1](https://github.com/bagherilab/container-collection/compare/v0.5.1...v0.5.2)
+
+### Admin
+
+- Add task decorator to init imports by [@jessicasyu](https://github.com/jessicasyu) in [#47](https://github.com/bagherilab/container-collection/pull/47)
+- Update pyproject.toml and dependencies by [@jessicasyu](https://github.com/jessicasyu) in [#48](https://github.com/bagherilab/container-collection/pull/48)
+
 # [v0.5.1](https://github.com/bagherilab/container-collection/releases/tag/v0.5.1) - 2023-03-28
 
 > Compare with [v0.5.0](https://github.com/bagherilab/container-collection/compare/v0.5.0...v0.5.1)
