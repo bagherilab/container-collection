@@ -1,0 +1,22 @@
+get\_docker\_logs
+=================
+
+.. automodule:: container_collection.docker.get_docker_logs
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

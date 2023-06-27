@@ -1,0 +1,35 @@
+﻿container\_collection.template
+==============================
+
+.. automodule:: container_collection.template
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+.. currentmodule:: container_collection
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   template.generate_input_contents
+

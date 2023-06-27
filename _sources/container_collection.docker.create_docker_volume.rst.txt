@@ -1,7 +1,0 @@
-container\_collection.docker.create\_docker\_volume module
-==========================================================
-
-.. automodule:: container_collection.docker.create_docker_volume
-   :members:
-   :undoc-members:
-   :show-inheritance:

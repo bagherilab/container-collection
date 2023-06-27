@@ -1,0 +1,22 @@
+update\_manifest\_contents
+==========================
+
+.. automodule:: container_collection.manifest.update_manifest_contents
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

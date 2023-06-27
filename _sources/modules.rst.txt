@@ -1,7 +1,0 @@
-container_collection
-====================
-
-.. toctree::
-   :maxdepth: 4
-
-   container_collection

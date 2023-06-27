@@ -1,7 +1,0 @@
-container\_collection.docker.submit\_docker\_job module
-=======================================================
-
-.. automodule:: container_collection.docker.submit_docker_job
-   :members:
-   :undoc-members:
-   :show-inheritance:

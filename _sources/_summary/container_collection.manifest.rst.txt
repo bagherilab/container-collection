@@ -1,0 +1,38 @@
+﻿container\_collection.manifest
+==============================
+
+.. automodule:: container_collection.manifest
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+.. currentmodule:: container_collection
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   manifest.filter_manifest_files
+   manifest.find_missing_conditions
+   manifest.summarize_manifest_files
+   manifest.update_manifest_contents
+

@@ -1,0 +1,22 @@
+filter\_manifest\_files
+=======================
+
+.. automodule:: container_collection.manifest.filter_manifest_files
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

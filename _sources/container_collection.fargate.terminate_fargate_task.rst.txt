@@ -1,7 +1,0 @@
-container\_collection.fargate.terminate\_fargate\_task module
-=============================================================
-
-.. automodule:: container_collection.fargate.terminate_fargate_task
-   :members:
-   :undoc-members:
-   :show-inheritance:

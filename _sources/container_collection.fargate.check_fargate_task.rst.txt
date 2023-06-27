@@ -1,7 +1,0 @@
-container\_collection.fargate.check\_fargate\_task module
-=========================================================
-
-.. automodule:: container_collection.fargate.check_fargate_task
-   :members:
-   :undoc-members:
-   :show-inheritance:

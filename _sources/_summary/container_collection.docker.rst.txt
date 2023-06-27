@@ -1,0 +1,43 @@
+﻿container\_collection.docker
+============================
+
+.. automodule:: container_collection.docker
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+.. currentmodule:: container_collection
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   docker.check_docker_job
+   docker.clean_docker_job
+   docker.create_docker_volume
+   docker.get_docker_logs
+   docker.make_docker_job
+   docker.remove_docker_volume
+   docker.run_docker_command
+   docker.submit_docker_job
+   docker.terminate_docker_job
+

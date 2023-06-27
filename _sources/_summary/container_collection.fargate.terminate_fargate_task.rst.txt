@@ -1,0 +1,22 @@
+terminate\_fargate\_task
+========================
+
+.. automodule:: container_collection.fargate.terminate_fargate_task
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

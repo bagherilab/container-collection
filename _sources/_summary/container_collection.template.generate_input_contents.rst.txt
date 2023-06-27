@@ -1,0 +1,22 @@
+generate\_input\_contents
+=========================
+
+.. automodule:: container_collection.template.generate_input_contents
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

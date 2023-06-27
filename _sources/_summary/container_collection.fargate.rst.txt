@@ -1,0 +1,39 @@
+﻿container\_collection.fargate
+=============================
+
+.. automodule:: container_collection.fargate
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+.. currentmodule:: container_collection
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   fargate.check_fargate_task
+   fargate.make_fargate_task
+   fargate.register_fargate_task
+   fargate.submit_fargate_task
+   fargate.terminate_fargate_task
+

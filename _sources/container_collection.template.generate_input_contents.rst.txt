@@ -1,7 +1,0 @@
-container\_collection.template.generate\_input\_contents module
-===============================================================
-
-.. automodule:: container_collection.template.generate_input_contents
-   :members:
-   :undoc-members:
-   :show-inheritance:

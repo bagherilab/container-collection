@@ -1,7 +1,0 @@
-container\_collection.batch.check\_batch\_job module
-====================================================
-
-.. automodule:: container_collection.batch.check_batch_job
-   :members:
-   :undoc-members:
-   :show-inheritance:

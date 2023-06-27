@@ -1,7 +1,0 @@
-container\_collection.docker.get\_docker\_logs module
-=====================================================
-
-.. automodule:: container_collection.docker.get_docker_logs
-   :members:
-   :undoc-members:
-   :show-inheritance:

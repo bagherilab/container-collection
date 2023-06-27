@@ -1,7 +1,0 @@
-container\_collection.docker.make\_docker\_job module
-=====================================================
-
-.. automodule:: container_collection.docker.make_docker_job
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,0 +1,40 @@
+﻿container\_collection.batch
+===========================
+
+.. automodule:: container_collection.batch
+    :members:
+    :undoc-members:
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+
+.. currentmodule:: container_collection
+
+.. autosummary::
+   :toctree:
+   :template: custom_module.rst
+   :recursive:
+
+   batch.check_batch_job
+   batch.get_batch_logs
+   batch.make_batch_job
+   batch.register_batch_job
+   batch.submit_batch_job
+   batch.terminate_batch_job
+
