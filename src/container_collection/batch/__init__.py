@@ -1,3 +1,5 @@
+"""Tasks for working with AWS Batch."""
+
 from prefect import task
 
 from .check_batch_job import check_batch_job
