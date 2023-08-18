@@ -1,8 +1,10 @@
-[![Build Status](https://github.com/bagherilab/container-collection/workflows/build/badge.svg)](https://github.com/bagherilab/container-collection/actions?query=workflow%3Abuild)
-[![Codecov](https://img.shields.io/codecov/c/gh/bagherilab/container-collection?token=OH8080ZFCU)](https://codecov.io/gh/bagherilab/container-collection)
-[![Lint Status](https://github.com/bagherilab/container-collection/workflows/lint/badge.svg)](https://github.com/bagherilab/container-collection/actions?query=workflow%3Alint)
-[![Documentation](https://github.com/bagherilab/container-collection/workflows/documentation/badge.svg)](https://bagherilab.github.io/container-collection/)
-[![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Build status](https://bagherilab.github.io/container-collection/_badges/build.svg)](https://github.com/bagherilab/container-collection/actions?query=workflow%3Abuild)
+[![Lint status](https://bagherilab.github.io/container-collection/_badges/lint.svg)](https://github.com/bagherilab/container-collection/actions?query=workflow%3Alint)
+[![Documentation](https://bagherilab.github.io/container-collection/_badges/documentation.svg)](https://bagherilab.github.io/container-collection/)
+[![Coverage](https://bagherilab.github.io/container-collection/_badges/coverage.svg)](https://bagherilab.github.io/container-collection/_coverage/)
+[![Code style](https://bagherilab.github.io/container-collection/_badges/style.svg)](https://github.com/psf/black)
+[![Version](https://bagherilab.github.io/container-collection/_badges/version.svg)](https://pypi.org/project/container-collection/)
+[![License](https://bagherilab.github.io/container-collection/_badges/license.svg)](https://github.com/bagherilab/container-collection/blob/main/LICENSE)
 
 Collection of tasks for running containerized models.
 Designed to be used both in [Prefect](https://docs.prefect.io/latest/) workflows and as modular, useful pieces of code.
