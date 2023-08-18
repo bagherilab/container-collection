@@ -1,3 +1,5 @@
+"""Tasks for working with AWS ECS Fargate."""
+
 from prefect import task
 
 from .check_fargate_task import check_fargate_task

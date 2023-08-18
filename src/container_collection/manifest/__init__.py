@@ -1,3 +1,5 @@
+"""Tasks for working with manifest files."""
+
 from prefect import task
 
 from .filter_manifest_files import filter_manifest_files
