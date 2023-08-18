@@ -2,8 +2,8 @@ register\_batch\_job
 ====================
 
 .. automodule:: container_collection.batch.register_batch_job
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

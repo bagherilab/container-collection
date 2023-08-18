@@ -2,8 +2,8 @@ terminate\_batch\_job
 =====================
 
 .. automodule:: container_collection.batch.terminate_batch_job
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

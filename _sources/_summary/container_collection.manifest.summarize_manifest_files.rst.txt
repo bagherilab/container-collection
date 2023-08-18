@@ -2,8 +2,8 @@ summarize\_manifest\_files
 ==========================
 
 .. automodule:: container_collection.manifest.summarize_manifest_files
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

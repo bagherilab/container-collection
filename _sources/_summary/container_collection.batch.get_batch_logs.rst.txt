@@ -2,8 +2,8 @@ get\_batch\_logs
 ================
 
 .. automodule:: container_collection.batch.get_batch_logs
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

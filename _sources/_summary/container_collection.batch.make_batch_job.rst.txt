@@ -2,8 +2,8 @@ make\_batch\_job
 ================
 
 .. automodule:: container_collection.batch.make_batch_job
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    

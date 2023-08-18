@@ -2,8 +2,8 @@ register\_fargate\_task
 =======================
 
 .. automodule:: container_collection.fargate.register_fargate_task
-    :members:
-    :undoc-members:
+   :members:
+   :undoc-members:
 
    
    
