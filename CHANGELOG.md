@@ -1,3 +1,16 @@
+# [v0.6.1](https://github.com/bagherilab/container-collection/releases/tag/v0.6.1) - 2023-08-18
+
+> Compare with [v0.6.0](https://github.com/bagherilab/container-collection/compare/v0.6.0...v0.6.1)
+
+### Documentation
+
+- Add module docstrings by [@jessicasyu](https://github.com/jessicasyu) in [#56](https://github.com/bagherilab/container-collection/pull/56)
+
+### Admin
+
+- Update workflow permissions and badges by [@jessicasyu](https://github.com/jessicasyu) in [#57](https://github.com/bagherilab/container-collection/pull/57)
+- Add missing publish coverage badge step by [@jessicasyu](https://github.com/jessicasyu) in [#58](https://github.com/bagherilab/container-collection/pull/58)
+
 # [v0.6.0](https://github.com/bagherilab/container-collection/releases/tag/v0.6.0) - 2023-06-29
 
 > Compare with [v0.5.2](https://github.com/bagherilab/container-collection/compare/v0.5.2...v0.6.0)
