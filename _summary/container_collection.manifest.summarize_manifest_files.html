@@ -245,7 +245,37 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.manifest.summarize_manifest_files.summarize_manifest_files">
 <span class="sig-name descname"><span class="pre">summarize_manifest_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/container_collection/manifest/summarize_manifest_files.html#summarize_manifest_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.manifest.summarize_manifest_files.summarize_manifest_files" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Summarize manifest files into a table.</p>
+<p>Summary table is formatted as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>┍━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━┯━━━━━━━━━━━━━┑
+│<span class="w">                 </span>│<span class="w"> </span>extension.a<span class="w">   </span>│<span class="w"> </span>...<span class="w"> </span>│<span class="w"> </span>extension.n<span class="w"> </span>│
+┝━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━┿━━━━━┿━━━━━━━━━━━━━┥
+│<span class="w"> </span>condition_key_a<span class="w"> </span>│<span class="w"> </span><span class="c1">#/# (##.## %) │ ... │ ✓           │</span>
+│<span class="w"> </span>condition_key_b<span class="w"> </span>│<span class="w"> </span><span class="c1">#/# (##.## %) │ ... │ ✓           │</span>
+│<span class="w"> </span>...<span class="w">             </span>│...<span class="w">            </span>│<span class="w"> </span>...<span class="w"> </span>│<span class="w"> </span>...<span class="w">         </span>│
+│<span class="w"> </span>condition_key_n<span class="w"> </span>│<span class="w"> </span><span class="c1">#/# (##.## %) │ ... │ ✓           │</span>
+┕━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━┷━━━━━━━━━━━━━┙
+</pre></div>
+</div>
+<p>For file extensions that have files  or each random seed, the summary table
+reports the number and percentage of random seeds. For file extensions with
+only one file per conditions, a checkmark (✓) is used to indicate if the
+file exists or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>manifest</strong> – Manifest of file keys, extensions, and locations.</p></li>
+<li><p><strong>name</strong> – Name of the simulation series.</p></li>
+<li><p><strong>conditions</strong> – List of series condition dictionaries (must include unique condition
+“key”).</p></li>
+<li><p><strong>seeds</strong> – List of series random seeds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Manifest summary table.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

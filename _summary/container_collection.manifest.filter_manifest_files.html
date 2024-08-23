@@ -245,22 +245,70 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.manifest.filter_manifest_files.filter_manifest_files">
 <span class="sig-name descname"><span class="pre">filter_manifest_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/container_collection/manifest/filter_manifest_files.html#filter_manifest_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.manifest.filter_manifest_files.filter_manifest_files" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Filter manifest file keys by incomplete extensions and given filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>manifest</strong> – Manifest of file keys, extensions, and locations.</p></li>
+<li><p><strong>extensions</strong> – List of single simulation output extensions.</p></li>
+<li><p><strong>include_filters</strong> – List of Unix filename pattern matching filter for included file keys.</p></li>
+<li><p><strong>exclude_filters</strong> – List of Unix filename pattern matching filter for excluded file keys.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Map of filtered manifest file keys to extensions and locations.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.manifest.filter_manifest_files.filter_incomplete_extensions">
 <span class="sig-name descname"><span class="pre">filter_incomplete_extensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/container_collection/manifest/filter_manifest_files.html#filter_incomplete_extensions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.manifest.filter_manifest_files.filter_incomplete_extensions" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Filters manifest for files with incomplete set of extensions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>manifest</strong> – Manifest of file keys, extensions, and locations.</p></li>
+<li><p><strong>extensions</strong> – List of single simulation output extensions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered manifest of file keys, extensions, and locations.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.manifest.filter_manifest_files.convert_to_dictionary">
 <span class="sig-name descname"><span class="pre">convert_to_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manifest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/container_collection/manifest/filter_manifest_files.html#convert_to_dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.manifest.filter_manifest_files.convert_to_dictionary" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Convert manifest dataframe to map of file key to extensions and locations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>manifest</strong> – Manifest of file keys, extensions, and locations.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Map of file key to extensions and locations.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.manifest.filter_manifest_files.filter_file_keys">
-<span class="sig-name descname"><span class="pre">filter_file_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="reference internal" href="../_modules/container_collection/manifest/filter_manifest_files.html#filter_file_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.manifest.filter_manifest_files.filter_file_keys" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">filter_file_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_filters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="reference internal" href="../_modules/container_collection/manifest/filter_manifest_files.html#filter_file_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.manifest.filter_manifest_files.filter_file_keys" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter keys using include and exclude Unix filename pattern matching filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>files</strong> – List of file keys.</p></li>
+<li><p><strong>include_filters</strong> – List of Unix filename pattern matching filter for included file keys.</p></li>
+<li><p><strong>exclude_filters</strong> – List of Unix filename pattern matching filter for excluded file keys.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered set of file keys.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

@@ -245,6 +245,20 @@
 
 
 <div class="viewcode-block" id="update_manifest_contents"><a class="viewcode-back" href="../../../_summary/container_collection.manifest.update_manifest_contents.html#container_collection.manifest.update_manifest_contents.update_manifest_contents">[docs]</a><span class="k">def</span> <span class="nf">update_manifest_contents</span><span class="p">(</span><span class="n">location_keys</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update manifest using files at given keys at specified locations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    location_keys</span>
+<span class="sd">        Map of locations to list of file keys.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Combined manifest of file keys, extensions, and locations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">all_manifests</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">location</span><span class="p">,</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">location_keys</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -262,6 +276,22 @@
 
 
 <div class="viewcode-block" id="make_file_manifest"><a class="viewcode-back" href="../../../_summary/container_collection.manifest.update_manifest_contents.html#container_collection.manifest.update_manifest_contents.make_file_manifest">[docs]</a><span class="k">def</span> <span class="nf">make_file_manifest</span><span class="p">(</span><span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create manifest for location with given list of file keys.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    location</span>
+<span class="sd">        File location (local path or S3 bucket).</span>
+<span class="sd">    keys</span>
+<span class="sd">        List of file keys.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Manifest of file keys, extensions, and locations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">contents</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
