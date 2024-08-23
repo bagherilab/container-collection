@@ -6,7 +6,7 @@ from container_collection.template.generate_input_contents import generate_input
 
 
 class TestGenerateInputContents(unittest.TestCase):
-    def test_generate_input_conditions_single_condition_template_single_condition_dict_success(
+    def test_generate_input_conditions_single_condition_template_single_condition_dict(
         self,
     ):
         actual_rendered = generate_input_contents(
@@ -15,7 +15,7 @@ class TestGenerateInputContents(unittest.TestCase):
         expected = ["Lorem ipsum This is condition A!"]
         self.assertCountEqual(expected, actual_rendered)
 
-    def test_generate_input_conditions_double_condition_template_double_condition_dict_success(
+    def test_generate_input_conditions_double_condition_template_double_condition_dict(
         self,
     ):
         actual_rendered = generate_input_contents(
@@ -30,7 +30,7 @@ class TestGenerateInputContents(unittest.TestCase):
         expected = ["Lorem ipsum This is condition A! This is condition B!"]
         self.assertCountEqual(expected, actual_rendered)
 
-    def test_generate_input_conditions_single_condition_template_two_single_condition_dicts_success(
+    def test_generate_input_conditions_single_condition_template_two_single_condition_dict(
         self,
     ):
         actual_rendered = generate_input_contents(
@@ -46,7 +46,7 @@ class TestGenerateInputContents(unittest.TestCase):
         ]
         self.assertCountEqual(expected, actual_rendered)
 
-    def test_generate_input_conditions_single_condition_template_double_condition_dict_success(
+    def test_generate_input_conditions_single_condition_template_double_condition_dict(
         self,
     ):
         actual_rendered = generate_input_contents(
@@ -61,7 +61,7 @@ class TestGenerateInputContents(unittest.TestCase):
         expected = ["Lorem ipsum This is condition A!"]
         self.assertCountEqual(expected, actual_rendered)
 
-    def test_generate_input_conditions_double_condition_template_single_condition_dict_failure(
+    def test_generate_input_conditions_double_condition_template_single_condition_dict(
         self,
     ):
         with self.assertRaises(UndefinedError):
