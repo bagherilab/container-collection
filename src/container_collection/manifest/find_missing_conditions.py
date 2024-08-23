@@ -8,6 +8,29 @@ def find_missing_conditions(
     seeds: list[int],
     extensions: list[str],
 ) -> list[dict]:
+    """
+    Find simulations missing or incomplete from list of conditions.
+
+    Parameters
+    ----------
+    manifest
+        Manifest of all files for simulation series.
+    name
+        Name of the simulation series.
+    conditions
+        List of series condition dictionaries (must include unique condition
+        "key").
+    seeds
+        List of series random seeds.
+    extensions
+        List of single simulation output extensions.
+
+    Returns
+    -------
+    :
+        List of missing conditions, including random seed.
+    """
+
     missing_conditions = []
 
     for condition in conditions:

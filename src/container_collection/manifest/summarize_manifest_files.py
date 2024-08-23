@@ -7,6 +7,45 @@ from tabulate import tabulate
 def summarize_manifest_files(
     manifest: pd.DataFrame, name: str, conditions: list[dict], seeds: list[int]
 ) -> str:
+    """
+    Summarize manifest files into a table.
+
+    Summary table is formatted as:
+
+    .. code-block:: bash
+
+        ┍━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━━━━┯━━━━━┯━━━━━━━━━━━━━┑
+        │                 │ extension.a   │ ... │ extension.n │
+        ┝━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━┿━━━━━┿━━━━━━━━━━━━━┥
+        │ condition_key_a │ #/# (##.## %) │ ... │ ✓           │
+        │ condition_key_b │ #/# (##.## %) │ ... │ ✓           │
+        │ ...             │...            │ ... │ ...         │
+        │ condition_key_n │ #/# (##.## %) │ ... │ ✓           │
+        ┕━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━━━━┷━━━━━┷━━━━━━━━━━━━━┙
+
+    For file extensions that have files  or each random seed, the summary table
+    reports the number and percentage of random seeds. For file extensions with
+    only one file per conditions, a checkmark (✓) is used to indicate if the
+    file exists or not.
+
+    Parameters
+    ----------
+    manifest
+        Manifest of file keys, extensions, and locations.
+    name
+        Name of the simulation series.
+    conditions
+        List of series condition dictionaries (must include unique condition
+        "key").
+    seeds
+        List of series random seeds.
+
+    Returns
+    -------
+    :
+        Manifest summary table.
+    """
+
     condition_keys = [f"{name}_{condition['key']}" for condition in conditions]
     manifest_keys = manifest.set_index("KEY").filter(regex=f"^{name}", axis="index").reset_index()
     extensions = manifest_keys["EXTENSION"].unique()
