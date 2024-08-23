@@ -10,6 +10,19 @@ class TestFilterManifestFiles(unittest.TestCase):
         self.extensions = ["extension_a", "extension_b"]
         self.manifest_columns = ["KEY", "EXTENSION", "LOCATION", "FULL_KEY"]
 
+    def test_filter_manifest_files_empty_manifest(self):
+        manifest = pd.DataFrame([], columns=self.manifest_columns)
+        include_filters = []
+        exclude_filters = []
+        expected_selection = {}
+        actual_selection = filter_manifest_files(
+            manifest=manifest,
+            extensions=self.extensions,
+            include_filters=include_filters,
+            exclude_filters=exclude_filters,
+        )
+        self.assertEqual(expected_selection, actual_selection)
+
     def test_filter_manifest_files_include_all_keys(self):
         contents = [
             [
