@@ -12,7 +12,7 @@ class TestFindMissingConditions(unittest.TestCase):
         self.conditions_no_attributes = [{"key": "key_A"}, {"key": "key_B"}, {"key": "key_C"}]
         self.extensions = ["extension_a", "extension_b"]
 
-    def test_find_missing_conditions_contains_no_missing_or_incomplete_conditions(self):
+    def test_find_missing_conditions_no_missing_or_incomplete_conditions(self):
         manifest_keys = [
             "name_key_A_0000",
             "name_key_A_0000",
@@ -64,7 +64,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_only_missing_conditions(self):
+    def test_find_missing_conditions_only_missing_conditions(self):
         manifest_keys = [
             "name_key_A_0001",
             "name_key_A_0001",
@@ -108,7 +108,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_only_incomplete_conditions(self):
+    def test_find_missing_conditions_only_incomplete_conditions(self):
         manifest_keys = [
             "name_key_A_0000",
             "name_key_A_0001",
@@ -158,7 +158,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_missing_and_incomplete_conditions(self):
+    def test_find_missing_conditions_missing_and_incomplete_conditions(self):
         manifest_keys = [
             "name_key_A_0001",
             "name_key_A_0002",
@@ -199,7 +199,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_additional_condition_attributes(self):
+    def test_find_missing_conditions_additional_condition_attributes(self):
         conditions_with_attributes = [
             {"key": "key_A", "attribute": "a"},
             {"key": "key_B", "attribute": "b"},
@@ -245,7 +245,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_missing_and_incomplete_conditions_with_unspecified_names(
+    def test_find_missing_conditions_missing_and_incomplete_conditions_with_unspecified_names(
         self,
     ):
         manifest_keys = [
@@ -292,7 +292,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_missing_and_incomplete_conditions_with_unspecified_conditions(
+    def test_find_missing_conditions_missing_and_incomplete_conditions_with_unspecified_conditions(
         self,
     ):
         manifest_keys = [
@@ -339,7 +339,7 @@ class TestFindMissingConditions(unittest.TestCase):
         )
         self.assertEqual(expected_missing, actual_missing)
 
-    def test_find_missing_conditions_contains_missing_and_incomplete_conditions_with_unspecified_seeds(
+    def test_find_missing_conditions_missing_and_incomplete_conditions_with_unspecified_seeds(
         self,
     ):
         manifest_keys = [
