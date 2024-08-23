@@ -1,15 +1,14 @@
 from typing import Optional
 
 import docker
-from prefect import task
 
 
-@task
 def run_docker_command(
     image: str,
     command: list[str],
     volume: Optional[docker.models.volumes.Volume] = None,
     environment: Optional[list] = None,
+    detach: bool = False,
 ) -> None:
     environment = [] if environment is None else environment
     volumes = {} if volume is None else {volume.name: {"bind": "/mnt", "mode": "rw"}}
@@ -21,4 +20,5 @@ def run_docker_command(
         environment=environment,
         volumes=volumes,
         auto_remove=True,
+        detach=detach,
     )

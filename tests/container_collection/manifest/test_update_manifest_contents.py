@@ -1,8 +1,8 @@
 import unittest
-from container_collection.manifest.update_manifest_contents import (
-    update_manifest_contents,
-)
+
 import pandas as pd
+
+from container_collection.manifest.update_manifest_contents import update_manifest_contents
 
 
 class TestUpdateManifestContents(unittest.TestCase):
@@ -24,7 +24,7 @@ class TestUpdateManifestContents(unittest.TestCase):
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
         expected.reset_index(drop=True, inplace=True)
-        actual = update_manifest_contents.fn(location_keys)
+        actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
     def test_update_manifest_contents_two_locations_populated_key_lists(self):
@@ -52,18 +52,18 @@ class TestUpdateManifestContents(unittest.TestCase):
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
         expected.reset_index(drop=True, inplace=True)
-        actual = update_manifest_contents.fn(location_keys)
+        actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
     def test_update_manifest_contents_empty_locations(self):
         expected = pd.DataFrame(columns=self.columns)
-        actual = update_manifest_contents.fn({})
+        actual = update_manifest_contents({})
         self.assertTrue(expected.equals(actual))
 
     def test_update_manifest_contents_single_location_empty_key_list(self):
         location_keys = {"s3://bucket-name": []}
         expected = pd.DataFrame(columns=self.columns)
-        actual = update_manifest_contents.fn(location_keys)
+        actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
     def test_update_manifest_contents_two_locations_duplicate_file(self):
@@ -79,7 +79,7 @@ class TestUpdateManifestContents(unittest.TestCase):
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
         expected.reset_index(drop=True, inplace=True)
-        actual = update_manifest_contents.fn(location_keys)
+        actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
     def test_update_manifest_contents_single_location_populated_key_list_no_directories(
@@ -94,5 +94,5 @@ class TestUpdateManifestContents(unittest.TestCase):
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
         expected.reset_index(drop=True, inplace=True)
-        actual = update_manifest_contents.fn(location_keys)
+        actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))

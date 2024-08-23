@@ -1,10 +1,8 @@
 import boto3
-from prefect import task
 from deepdiff import DeepDiff
 
 
-@task
-def register_fargate_task(task_definition: dict) -> None:
+def register_fargate_task(task_definition: dict) -> str:
     client = boto3.client("ecs")
     response = client.list_task_definitions(familyPrefix=task_definition["family"])
 

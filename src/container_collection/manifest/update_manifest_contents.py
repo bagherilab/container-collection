@@ -1,11 +1,23 @@
 import os
 
 import pandas as pd
-from prefect import task
 
 
-@task
 def update_manifest_contents(location_keys: dict) -> pd.DataFrame:
+    """
+    Update manifest using files at given keys at specified locations.
+
+    Parameters
+    ----------
+    location_keys
+        Map of locations to list of file keys.
+
+    Returns
+    -------
+    :
+        Combined manifest of file keys, extensions, and locations.
+    """
+
     all_manifests = []
 
     for location, keys in location_keys.items():
@@ -23,6 +35,22 @@ def update_manifest_contents(location_keys: dict) -> pd.DataFrame:
 
 
 def make_file_manifest(location: str, keys: list[str]) -> pd.DataFrame:
+    """
+    Create manifest for location with given list of file keys.
+
+    Parameters
+    ----------
+    location
+        File location (local path or S3 bucket).
+    keys
+        List of file keys.
+
+    Returns
+    -------
+    :
+        Manifest of file keys, extensions, and locations.
+    """
+
     contents = []
 
     for key in keys:

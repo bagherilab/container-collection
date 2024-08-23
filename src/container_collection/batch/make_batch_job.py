@@ -1,29 +1,28 @@
-from prefect import task
+from typing import Optional
 
 
-@task
 def make_batch_job(
     name: str,
     image: str,
-    account: str,
-    region: str,
-    user: str,
     vcpus: int,
     memory: int,
-    prefix: str,
+    environment: Optional[list[dict[str, str]]] = None,
+    job_role_arn: Optional[str] = None,
 ) -> dict:
+    container_properties = {
+        "image": image,
+        "vcpus": vcpus,
+        "memory": memory,
+    }
+
+    if environment is not None:
+        container_properties["environment"] = environment
+
+    if job_role_arn is not None:
+        container_properties["jobRoleArn"] = job_role_arn
+
     return {
-        "jobDefinitionName": f"{user}_{name}",
+        "jobDefinitionName": name,
         "type": "container",
-        "containerProperties": {
-            "image": f"{account}.dkr.ecr.{region}.amazonaws.com/{user}/{image}",
-            "vcpus": vcpus,
-            "memory": memory,
-            "environment": [
-                {"name": "SIMULATION_TYPE", "value": "AWS"},
-                {"name": "BATCH_WORKING_URL", "value": prefix},
-                {"name": "FILE_SET_NAME", "value": name},
-            ],
-            "jobRoleArn": f"arn:aws:iam::{account}:role/BatchJobRole",
-        },
+        "containerProperties": container_properties,
     }
