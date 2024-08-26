@@ -96,3 +96,7 @@ class TestUpdateManifestContents(unittest.TestCase):
         expected.reset_index(drop=True, inplace=True)
         actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
+
+
+if __name__ == "__main__":
+    unittest.main()

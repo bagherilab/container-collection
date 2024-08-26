@@ -604,3 +604,7 @@ class TestFilterManifestFiles(unittest.TestCase):
                     exclude_filters=exclude_filters,
                 )
                 self.assertEqual(expected_selection, actual_selection)
+
+
+if __name__ == "__main__":
+    unittest.main()
