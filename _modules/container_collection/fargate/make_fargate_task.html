@@ -242,49 +242,17 @@
 <div class="viewcode-block" id="make_fargate_task"><a class="viewcode-back" href="../../../_summary/container_collection.fargate.make_fargate_task.html#container_collection.fargate.make_fargate_task.make_fargate_task">[docs]</a><span></span><span class="k">def</span> <span class="nf">make_fargate_task</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">account</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">vcpus</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">memory</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">task_role_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">execution_role_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create Fargate task definition.</span>
-
-<span class="sd">    Docker images on the Docker Hub registry are available by default, and can</span>
-<span class="sd">    be specified using ``image:tag``. Otherwise, use ``repository/image:tag``.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    name</span>
-<span class="sd">        Task definition name.</span>
-<span class="sd">    image</span>
-<span class="sd">        Docker image.</span>
-<span class="sd">    region</span>
-<span class="sd">        Logging region.</span>
-<span class="sd">    user</span>
-<span class="sd">        User name prefix for task name.</span>
-<span class="sd">    vcpus</span>
-<span class="sd">        Hard limit of CPU units to present to the task.</span>
-<span class="sd">    memory</span>
-<span class="sd">        Hard limit of memory to present to the task.</span>
-<span class="sd">    task_role_arn</span>
-<span class="sd">        ARN for IAM role for the task container.</span>
-<span class="sd">    execution_role_arn : str</span>
-<span class="sd">        ARN for IAM role for the container agent.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    :</span>
-<span class="sd">        Task definition.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">&quot;containerDefinitions&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">image</span><span class="p">,</span>
+                <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">account</span><span class="si">}</span><span class="s2">.dkr.ecr.</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">.amazonaws.com/</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;essential&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="s2">&quot;portMappings&quot;</span><span class="p">:</span> <span class="p">[],</span>
                 <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -304,8 +272,8 @@
         <span class="s2">&quot;family&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s2">&quot;networkMode&quot;</span><span class="p">:</span> <span class="s2">&quot;awsvpc&quot;</span><span class="p">,</span>
         <span class="s2">&quot;requiresCompatibilities&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;FARGATE&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;taskRoleArn&quot;</span><span class="p">:</span> <span class="n">task_role_arn</span><span class="p">,</span>
-        <span class="s2">&quot;executionRoleArn&quot;</span><span class="p">:</span> <span class="n">execution_role_arn</span><span class="p">,</span>
+        <span class="s2">&quot;taskRoleArn&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">account</span><span class="si">}</span><span class="s2">:role/BatchJobRole&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;executionRoleArn&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;arn:aws:iam::</span><span class="si">{</span><span class="n">account</span><span class="si">}</span><span class="s2">:role/ecsTaskExecutionRole&quot;</span><span class="p">,</span>
         <span class="s2">&quot;cpu&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">vcpus</span><span class="p">),</span>
         <span class="s2">&quot;memory&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">memory</span><span class="p">),</span>
     <span class="p">}</span></div>

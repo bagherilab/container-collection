@@ -244,28 +244,8 @@
 <span id="make-fargate-task"></span><h1>make_fargate_task<a class="headerlink" href="#module-container_collection.fargate.make_fargate_task" title="Permalink to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.fargate.make_fargate_task.make_fargate_task">
-<span class="sig-name descname"><span class="pre">make_fargate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_role_arn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">execution_role_arn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/container_collection/fargate/make_fargate_task.html#make_fargate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.fargate.make_fargate_task.make_fargate_task" title="Permalink to this definition">#</a></dt>
-<dd><p>Create Fargate task definition.</p>
-<p>Docker images on the Docker Hub registry are available by default, and can
-be specified using <code class="docutils literal notranslate"><span class="pre">image:tag</span></code>. Otherwise, use <code class="docutils literal notranslate"><span class="pre">repository/image:tag</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – Task definition name.</p></li>
-<li><p><strong>image</strong> – Docker image.</p></li>
-<li><p><strong>region</strong> – Logging region.</p></li>
-<li><p><strong>user</strong> – User name prefix for task name.</p></li>
-<li><p><strong>vcpus</strong> – Hard limit of CPU units to present to the task.</p></li>
-<li><p><strong>memory</strong> – Hard limit of memory to present to the task.</p></li>
-<li><p><strong>task_role_arn</strong> – ARN for IAM role for the task container.</p></li>
-<li><p><strong>execution_role_arn</strong> (<em>str</em>) – ARN for IAM role for the container agent.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Task definition.</p>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">make_fargate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/container_collection/fargate/make_fargate_task.html#make_fargate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.fargate.make_fargate_task.make_fargate_task" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 
