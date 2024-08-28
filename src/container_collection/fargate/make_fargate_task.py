@@ -1,17 +1,49 @@
 def make_fargate_task(
     name: str,
     image: str,
-    account: str,
     region: str,
     user: str,
     vcpus: int,
     memory: int,
+    task_role_arn: str,
+    execution_role_arn: str,
 ) -> dict:
+    """
+    Create Fargate task definition.
+
+    Docker images on the Docker Hub registry are available by default, and can
+    be specified using ``image:tag``. Otherwise, use ``repository/image:tag``.
+
+    Parameters
+    ----------
+    name
+        Task definition name.
+    image
+        Docker image.
+    region
+        Logging region.
+    user
+        User name prefix for task name.
+    vcpus
+        Hard limit of CPU units to present to the task.
+    memory
+        Hard limit of memory to present to the task.
+    task_role_arn
+        ARN for IAM role for the task container.
+    execution_role_arn : str
+        ARN for IAM role for the container agent.
+
+    Returns
+    -------
+    :
+        Task definition.
+    """
+
     return {
         "containerDefinitions": [
             {
                 "name": f"{user}_{name}",
-                "image": f"{account}.dkr.ecr.{region}.amazonaws.com/{user}/{image}",
+                "image": image,
                 "essential": True,
                 "portMappings": [],
                 "environment": [],
@@ -31,8 +63,8 @@ def make_fargate_task(
         "family": f"{user}_{name}",
         "networkMode": "awsvpc",
         "requiresCompatibilities": ["FARGATE"],
-        "taskRoleArn": f"arn:aws:iam::{account}:role/BatchJobRole",
-        "executionRoleArn": f"arn:aws:iam::{account}:role/ecsTaskExecutionRole",
+        "taskRoleArn": task_role_arn,
+        "executionRoleArn": execution_role_arn,
         "cpu": str(vcpus),
         "memory": str(memory),
     }
