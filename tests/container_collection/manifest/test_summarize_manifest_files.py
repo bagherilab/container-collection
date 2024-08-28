@@ -378,3 +378,7 @@ class TestSummarizeManifestFiles(unittest.TestCase):
             manifest=manifest, name=self.name, conditions=self.conditions, seeds=self.seeds
         )
         self.assertEqual(expected_summary, actual_summary)
+
+
+if __name__ == "__main__":
+    unittest.main()

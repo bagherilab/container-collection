@@ -385,3 +385,7 @@ class TestFindMissingConditions(unittest.TestCase):
             extensions=self.extensions,
         )
         self.assertEqual(expected_missing, actual_missing)
+
+
+if __name__ == "__main__":
+    unittest.main()

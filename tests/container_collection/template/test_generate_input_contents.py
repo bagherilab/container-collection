@@ -69,3 +69,7 @@ class TestGenerateInputContents(unittest.TestCase):
                 "Lorem ipsum {{condition_a}} {{condition_b}}",
                 [{"condition_a": "This is condition A!"}],
             )
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -4,6 +4,28 @@ import boto3
 def submit_batch_job(
     name: str, job_definition_arn: str, user: str, queue: str, size: int
 ) -> list[str]:
+    """
+    Submit job to AWS Batch.
+
+    Parameters
+    ----------
+    name
+        Job name.
+    job_definition_arn
+        Job definition ARN.
+    user
+        User name prefix for job name.
+    queue
+        Job queue.
+    size
+        Number of jobs in array.
+
+    Returns
+    -------
+    :
+        List of job ARNs.
+    """
+
     job_submission = {
         "jobName": f"{user}_{name}",
         "jobQueue": queue,
