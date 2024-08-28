@@ -2,7 +2,8 @@ from time import sleep
 
 import boto3
 
-TERMINATION_REASON = "Prefect workflow termination"
+TERMINATION_REASON = "Termination requested by workflow."
+"""Reason sent for terminating jobs from a workflow."""
 
 
 def terminate_batch_job(job_arn: str) -> None:

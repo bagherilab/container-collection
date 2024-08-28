@@ -6,6 +6,7 @@ from prefect.context import TaskRunContext
 from prefect.states import Failed, State
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
+"""Exit code used when task run retries exceed the maximum retries."""
 
 
 def check_batch_job(job_arn: str, max_retries: int) -> Union[int, State, bool]:
