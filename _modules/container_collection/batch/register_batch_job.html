@@ -244,6 +244,24 @@
 
 
 <div class="viewcode-block" id="register_batch_job"><a class="viewcode-back" href="../../../_summary/container_collection.batch.register_batch_job.html#container_collection.batch.register_batch_job.register_batch_job">[docs]</a><span class="k">def</span> <span class="nf">register_batch_job</span><span class="p">(</span><span class="n">job_definition</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Register job definition to AWS Batch.</span>
+
+<span class="sd">    If a definition for the given job definition name already exists, and the</span>
+<span class="sd">    contents of the definition are not changed, then the method will return the</span>
+<span class="sd">    existing job definition ARN rather than creating a new revision.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    job_definition</span>
+<span class="sd">        Batch job definition.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Job definition ARN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_job_definitions</span><span class="p">(</span>
@@ -258,6 +276,7 @@
             <span class="k">return</span> <span class="n">existing_definition</span><span class="p">[</span><span class="s2">&quot;jobDefinitionArn&quot;</span><span class="p">]</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">register_job_definition</span><span class="p">(</span><span class="o">**</span><span class="n">job_definition</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;jobDefinitionArn&quot;</span><span class="p">]</span></div>
 </pre></div>
         </article>

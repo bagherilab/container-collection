@@ -243,16 +243,42 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">import</span> <span class="nn">prefect</span>
-<span class="kn">from</span> <span class="nn">prefect.server.schemas.states</span> <span class="kn">import</span> <span class="n">Failed</span><span class="p">,</span> <span class="n">State</span>
+<span class="kn">from</span> <span class="nn">prefect.context</span> <span class="kn">import</span> <span class="n">TaskRunContext</span>
+<span class="kn">from</span> <span class="nn">prefect.states</span> <span class="kn">import</span> <span class="n">Failed</span><span class="p">,</span> <span class="n">State</span>
 
 <span class="n">RETRIES_EXCEEDED_EXIT_CODE</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="sd">&quot;&quot;&quot;Exit code used when task run retries exceed the maximum retries.&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="check_batch_job"><a class="viewcode-back" href="../../../_summary/container_collection.batch.check_batch_job.html#container_collection.batch.check_batch_job.check_batch_job">[docs]</a><span class="k">def</span> <span class="nf">check_batch_job</span><span class="p">(</span><span class="n">job_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">State</span><span class="p">]:</span>
-    <span class="n">task_run</span> <span class="o">=</span> <span class="n">prefect</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">get_run_context</span><span class="p">()</span><span class="o">.</span><span class="n">task_run</span>  <span class="c1"># type: ignore</span>
+<div class="viewcode-block" id="check_batch_job"><a class="viewcode-back" href="../../../_summary/container_collection.batch.check_batch_job.html#container_collection.batch.check_batch_job.check_batch_job">[docs]</a><span class="k">def</span> <span class="nf">check_batch_job</span><span class="p">(</span><span class="n">job_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">State</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check for exit code of an AWS Batch job.</span>
 
-    <span class="k">if</span> <span class="n">task_run</span><span class="o">.</span><span class="n">run_count</span> <span class="o">&gt;</span> <span class="n">max_retries</span><span class="p">:</span>
+<span class="sd">    If this task is running within a Prefect flow, it will use the task run</span>
+<span class="sd">    context to get the current run count. While the run count is below the</span>
+<span class="sd">    maximum number of retries, the task will continue to attempt to get the exit</span>
+<span class="sd">    code, and can be called with a retry delay to periodically check the status</span>
+<span class="sd">    of jobs.</span>
+
+<span class="sd">    If this task is not running within a Prefect flow, the ``max_retries``</span>
+<span class="sd">    parameters is ignored. Jobs that are still running will throw an exception.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    job_arn</span>
+<span class="sd">        Job ARN.</span>
+<span class="sd">    max_retries</span>
+<span class="sd">        Maximum number of retries.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Exit code if the job is complete, otherwise throws an exception.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="n">TaskRunContext</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">task_run</span><span class="o">.</span><span class="n">run_count</span> <span class="o">&gt;</span> <span class="n">max_retries</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">RETRIES_EXCEEDED_EXIT_CODE</span>
 
     <span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
@@ -271,8 +297,11 @@
         <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_jobs</span><span class="p">(</span><span class="n">jobs</span><span class="o">=</span><span class="p">[</span><span class="n">job_arn</span><span class="p">])[</span><span class="s2">&quot;jobs&quot;</span><span class="p">]</span>
         <span class="n">status</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;RUNNING&quot;</span><span class="p">:</span>
+    <span class="c1"># For jobs that are running, throw the appropriate exception.</span>
+    <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;RUNNING&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Failed</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;RUNNING&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Job is in RUNNING state and does not have exit code.&quot;</span><span class="p">)</span>
 
     <span class="n">exitcode</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;attempts&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;container&quot;</span><span class="p">][</span><span class="s2">&quot;exitCode&quot;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">exitcode</span></div>

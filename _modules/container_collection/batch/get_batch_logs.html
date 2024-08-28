@@ -241,8 +241,27 @@
           <h1>Source code for container_collection.batch.get_batch_logs</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">boto3</span>
 
+<span class="n">LOG_GROUP_NAME</span> <span class="o">=</span> <span class="s2">&quot;/aws/batch/job&quot;</span>
+<span class="sd">&quot;&quot;&quot;AWS Batch log group name.&quot;&quot;&quot;</span>
+
 
 <div class="viewcode-block" id="get_batch_logs"><a class="viewcode-back" href="../../../_summary/container_collection.batch.get_batch_logs.html#container_collection.batch.get_batch_logs.get_batch_logs">[docs]</a><span class="k">def</span> <span class="nf">get_batch_logs</span><span class="p">(</span><span class="n">job_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">log_filter</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get logs for AWS Batch job.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    job_arn</span>
+<span class="sd">        Job ARN.</span>
+<span class="sd">    log_filter</span>
+<span class="sd">        Filter for log events.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        All filtered log events.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_jobs</span><span class="p">(</span><span class="n">jobs</span><span class="o">=</span><span class="p">[</span><span class="n">job_arn</span><span class="p">])[</span><span class="s2">&quot;jobs&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">log_stream</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;container&quot;</span><span class="p">][</span><span class="s2">&quot;logStreamName&quot;</span><span class="p">]</span>
@@ -251,20 +270,23 @@
     <span class="n">log_events</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">filter_log_events</span><span class="p">(</span>
-        <span class="n">logGroupName</span><span class="o">=</span><span class="s2">&quot;/aws/batch/job&quot;</span><span class="p">,</span>
+        <span class="n">logGroupName</span><span class="o">=</span><span class="n">LOG_GROUP_NAME</span><span class="p">,</span>
         <span class="n">logStreamNames</span><span class="o">=</span><span class="p">[</span><span class="n">log_stream</span><span class="p">],</span>
         <span class="n">filterPattern</span><span class="o">=</span><span class="n">log_filter</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="k">while</span> <span class="s2">&quot;nextToken&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]:</span>
         <span class="n">log_events</span> <span class="o">=</span> <span class="n">log_events</span> <span class="o">+</span> <span class="p">[</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]]</span>
 
+    <span class="k">while</span> <span class="s2">&quot;nextToken&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">filter_log_events</span><span class="p">(</span>
             <span class="n">logGroupName</span><span class="o">=</span><span class="s2">&quot;/aws/batch/job&quot;</span><span class="p">,</span>
             <span class="n">logStreamNames</span><span class="o">=</span><span class="p">[</span><span class="n">log_stream</span><span class="p">],</span>
             <span class="n">filterPattern</span><span class="o">=</span><span class="n">log_filter</span><span class="p">,</span>
             <span class="n">nextToken</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;nextToken&quot;</span><span class="p">],</span>
         <span class="p">)</span>
+
+        <span class="n">log_events</span> <span class="o">=</span> <span class="n">log_events</span> <span class="o">+</span> <span class="p">[</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]]</span>
 
     <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_events</span><span class="p">)</span></div>
 </pre></div>

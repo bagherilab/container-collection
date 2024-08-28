@@ -245,6 +245,28 @@
 <div class="viewcode-block" id="submit_batch_job"><a class="viewcode-back" href="../../../_summary/container_collection.batch.submit_batch_job.html#container_collection.batch.submit_batch_job.submit_batch_job">[docs]</a><span class="k">def</span> <span class="nf">submit_batch_job</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">job_definition_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Submit job to AWS Batch.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name</span>
+<span class="sd">        Job name.</span>
+<span class="sd">    job_definition_arn</span>
+<span class="sd">        Job definition ARN.</span>
+<span class="sd">    user</span>
+<span class="sd">        User name prefix for job name.</span>
+<span class="sd">    queue</span>
+<span class="sd">        Job queue.</span>
+<span class="sd">    size</span>
+<span class="sd">        Number of jobs in array.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        List of job ARNs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">job_submission</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;jobName&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s2">&quot;jobQueue&quot;</span><span class="p">:</span> <span class="n">queue</span><span class="p">,</span>
