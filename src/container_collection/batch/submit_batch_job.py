@@ -1,11 +1,18 @@
+from typing import Any
+
 import boto3
 
 
 def submit_batch_job(
-    name: str, job_definition_arn: str, user: str, queue: str, size: int
+    name: str,
+    job_definition_arn: str,
+    user: str,
+    queue: str,
+    size: int,
+    **kwargs: Any,
 ) -> list[str]:
     """
-    Submit job to AWS Batch.
+    Submit AWS Batch job.
 
     Parameters
     ----------
@@ -19,6 +26,10 @@ def submit_batch_job(
         Job queue.
     size
         Number of jobs in array.
+    **kwargs
+        Additional parameters for job submission. The keyword arguments are
+        passed to `boto3` Batch client method `submit_job`.
+
 
     Returns
     -------
@@ -26,16 +37,17 @@ def submit_batch_job(
         List of job ARNs.
     """
 
-    job_submission = {
+    default_job_submission = {
         "jobName": f"{user}_{name}",
         "jobQueue": queue,
         "jobDefinition": job_definition_arn,
     }
 
     if size > 1:
-        job_submission["arrayProperties"] = {"size": size}  # type: ignore
+        default_job_submission["arrayProperties"] = {"size": size}  # type: ignore
 
     client = boto3.client("batch")
+    job_submission = default_job_submission | kwargs
     response = client.submit_job(**job_submission)
 
     if size > 1:
