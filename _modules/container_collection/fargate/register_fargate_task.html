@@ -244,6 +244,24 @@
 
 
 <div class="viewcode-block" id="register_fargate_task"><a class="viewcode-back" href="../../../_summary/container_collection.fargate.register_fargate_task.html#container_collection.fargate.register_fargate_task.register_fargate_task">[docs]</a><span class="k">def</span> <span class="nf">register_fargate_task</span><span class="p">(</span><span class="n">task_definition</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Register task definition to ECS Fargate.</span>
+
+<span class="sd">    If a definition for the given task definition name already exists, and the</span>
+<span class="sd">    contents of the definition are not changed, then the method will return the</span>
+<span class="sd">    existing task definition ARN rather than creating a new revision.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    task_definition</span>
+<span class="sd">        Fargate task definition.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Task definition ARN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;ecs&quot;</span><span class="p">)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_task_definitions</span><span class="p">(</span><span class="n">familyPrefix</span><span class="o">=</span><span class="n">task_definition</span><span class="p">[</span><span class="s2">&quot;family&quot;</span><span class="p">])</span>
 

@@ -263,7 +263,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
-
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_job_definitions</span><span class="p">(</span>
         <span class="n">jobDefinitionName</span><span class="o">=</span><span class="n">job_definition</span><span class="p">[</span><span class="s2">&quot;jobDefinitionName&quot;</span><span class="p">],</span>
     <span class="p">)</span>
@@ -276,7 +275,6 @@
             <span class="k">return</span> <span class="n">existing_definition</span><span class="p">[</span><span class="s2">&quot;jobDefinitionArn&quot;</span><span class="p">]</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">register_job_definition</span><span class="p">(</span><span class="o">**</span><span class="n">job_definition</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;jobDefinitionArn&quot;</span><span class="p">]</span></div>
 </pre></div>
         </article>

@@ -242,10 +242,36 @@
         <article role="main">
           <section id="module-container_collection.fargate.check_fargate_task">
 <span id="check-fargate-task"></span><h1>check_fargate_task<a class="headerlink" href="#module-container_collection.fargate.check_fargate_task" title="Permalink to this heading">#</a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="container_collection.fargate.check_fargate_task.RETRIES_EXCEEDED_EXIT_CODE">
+<span class="sig-name descname"><span class="pre">RETRIES_EXCEEDED_EXIT_CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">80</span></em><a class="headerlink" href="#container_collection.fargate.check_fargate_task.RETRIES_EXCEEDED_EXIT_CODE" title="Permalink to this definition">#</a></dt>
+<dd><p>Exit code used when task run retries exceed the maximum retries.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.fargate.check_fargate_task.check_fargate_task">
 <span class="sig-name descname"><span class="pre">check_fargate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_arn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">State</span></span></span><a class="reference internal" href="../_modules/container_collection/fargate/check_fargate_task.html#check_fargate_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.fargate.check_fargate_task.check_fargate_task" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Check for exit code of an AWS Fargate task.</p>
+<p>If this task is running within a Prefect flow, it will use the task run
+context to get the current run count. While the run count is below the
+maximum number of retries, the task will continue to attempt to get the exit
+code, and can be called with a retry delay to periodically check the status
+of jobs.</p>
+<p>If this task is not running within a Prefect flow, the <code class="docutils literal notranslate"><span class="pre">max_retries</span></code>
+parameters is ignored. Tasks that are still running will throw an exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster</strong> – ECS cluster name.</p></li>
+<li><p><strong>task_arn</strong> (<em>str</em>) – Task ARN.</p></li>
+<li><p><strong>max_retries</strong> – Maximum number of retries.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Exit code if the job is complete, otherwise throws an exception.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 
@@ -305,6 +331,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">check_fargate_task</a><ul>
+<li><a class="reference internal" href="#container_collection.fargate.check_fargate_task.RETRIES_EXCEEDED_EXIT_CODE"><code class="docutils literal notranslate"><span class="pre">RETRIES_EXCEEDED_EXIT_CODE</span></code></a></li>
 <li><a class="reference internal" href="#container_collection.fargate.check_fargate_task.check_fargate_task"><code class="docutils literal notranslate"><span class="pre">check_fargate_task()</span></code></a></li>
 </ul>
 </li>

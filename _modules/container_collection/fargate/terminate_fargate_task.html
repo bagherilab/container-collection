@@ -239,12 +239,29 @@
         </div>
         <article role="main">
           <h1>Source code for container_collection.fargate.terminate_fargate_task</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">TERMINATION_REASON</span> <span class="o">=</span> <span class="s2">&quot;Termination requested by workflow.&quot;</span>
+<span class="sd">&quot;&quot;&quot;Reason sent for terminating jobs from a workflow.&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="terminate_fargate_task"><a class="viewcode-back" href="../../../_summary/container_collection.fargate.terminate_fargate_task.html#container_collection.fargate.terminate_fargate_task.terminate_fargate_task">[docs]</a><span class="k">def</span> <span class="nf">terminate_fargate_task</span><span class="p">(</span><span class="n">cluster</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task_arn</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Terminate task on AWS Fargate.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cluster</span>
+<span class="sd">        ECS cluster name.</span>
+<span class="sd">    task_arn</span>
+<span class="sd">        Task ARN.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;ecs&quot;</span><span class="p">)</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">stop_task</span><span class="p">(</span><span class="n">cluster</span><span class="o">=</span><span class="n">cluster</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">task_arn</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Prefect workflow termination&quot;</span><span class="p">)</span></div>
+    <span class="n">client</span><span class="o">.</span><span class="n">stop_task</span><span class="p">(</span><span class="n">cluster</span><span class="o">=</span><span class="n">cluster</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="n">task_arn</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="n">TERMINATION_REASON</span><span class="p">)</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>
