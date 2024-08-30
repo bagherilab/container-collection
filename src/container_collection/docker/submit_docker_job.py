@@ -12,7 +12,7 @@ def submit_docker_job(api_client: APIClient, job_definition: dict, volume_name: 
     job_definition
         Docker job definition used to create job container.
     volume_name
-        Name of created volume.
+        Name of the docker volume.
 
     Returns
     -------
