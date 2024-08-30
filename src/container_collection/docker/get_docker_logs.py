@@ -1,9 +1,26 @@
-import docker
+from docker import APIClient
 
 
-def get_docker_logs(container_id: str, log_filter: str) -> str:
-    client = docker.APIClient(base_url="unix://var/run/docker.sock")
-    logs = client.logs(container=container_id).decode("utf-8")
+def get_docker_logs(api_client: APIClient, container_id: str, log_filter: str) -> str:
+    """
+    Get logs for Docker job.
+
+    Parameters
+    ----------
+    api_client
+        Docker API client.
+    container_id
+        Docker container ID.
+    log_filter
+        Filter for log events (use "-" for exclusion).
+
+    Returns
+    -------
+    :
+        All filtered log events.
+    """
+
+    logs = api_client.logs(container=container_id).decode("utf-8")
 
     log_items = logs.split("\n")
     if "-" in log_filter:
