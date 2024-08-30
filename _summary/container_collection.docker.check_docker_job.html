@@ -242,10 +242,36 @@
         <article role="main">
           <section id="module-container_collection.docker.check_docker_job">
 <span id="check-docker-job"></span><h1>check_docker_job<a class="headerlink" href="#module-container_collection.docker.check_docker_job" title="Permalink to this heading">#</a></h1>
+<dl class="py data">
+<dt class="sig sig-object py" id="container_collection.docker.check_docker_job.RETRIES_EXCEEDED_EXIT_CODE">
+<span class="sig-name descname"><span class="pre">RETRIES_EXCEEDED_EXIT_CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">80</span></em><a class="headerlink" href="#container_collection.docker.check_docker_job.RETRIES_EXCEEDED_EXIT_CODE" title="Permalink to this definition">#</a></dt>
+<dd><p>Exit code used when task run retries exceed the maximum retries.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="container_collection.docker.check_docker_job.check_docker_job">
-<span class="sig-name descname"><span class="pre">check_docker_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">container_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">State</span></span></span><a class="reference internal" href="../_modules/container_collection/docker/check_docker_job.html#check_docker_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.docker.check_docker_job.check_docker_job" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">check_docker_job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">APIClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">State</span></span></span><a class="reference internal" href="../_modules/container_collection/docker/check_docker_job.html#check_docker_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_collection.docker.check_docker_job.check_docker_job" title="Permalink to this definition">#</a></dt>
+<dd><p>Check for exit code of a Docker container.</p>
+<p>If this task is running within a Prefect flow, it will use the task run
+context to get the current run count. While the run count is below the
+maximum number of retries, the task will continue to attempt to get the exit
+code, and can be called with a retry delay to periodically check the status
+of jobs.</p>
+<p>If this task is not running within a Prefect flow, the <code class="docutils literal notranslate"><span class="pre">max_retries</span></code>
+parameters is ignored. Jobs that are still running will throw an exception.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_client</strong> – Docker API client.</p></li>
+<li><p><strong>container_id</strong> – ID of container to check.</p></li>
+<li><p><strong>max_retries</strong> – Maximum number of retries.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Exit code if the job is complete, otherwise throws an exception.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 
@@ -305,6 +331,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">check_docker_job</a><ul>
+<li><a class="reference internal" href="#container_collection.docker.check_docker_job.RETRIES_EXCEEDED_EXIT_CODE"><code class="docutils literal notranslate"><span class="pre">RETRIES_EXCEEDED_EXIT_CODE</span></code></a></li>
 <li><a class="reference internal" href="#container_collection.docker.check_docker_job.check_docker_job"><code class="docutils literal notranslate"><span class="pre">check_docker_job()</span></code></a></li>
 </ul>
 </li>

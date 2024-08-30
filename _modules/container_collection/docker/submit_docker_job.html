@@ -239,17 +239,34 @@
         </div>
         <article role="main">
           <h1>Source code for container_collection.docker.submit_docker_job</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">docker</span>
+<span></span><span class="kn">from</span> <span class="nn">docker</span> <span class="kn">import</span> <span class="n">APIClient</span>
 
 
-<div class="viewcode-block" id="submit_docker_job"><a class="viewcode-back" href="../../../_summary/container_collection.docker.submit_docker_job.html#container_collection.docker.submit_docker_job.submit_docker_job">[docs]</a><span class="k">def</span> <span class="nf">submit_docker_job</span><span class="p">(</span><span class="n">job_definition</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="n">docker</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">volumes</span><span class="o">.</span><span class="n">Volume</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="o">.</span><span class="n">APIClient</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;unix://var/run/docker.sock&quot;</span><span class="p">)</span>
-    <span class="n">host_config</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_host_config</span><span class="p">(</span><span class="n">binds</span><span class="o">=</span><span class="p">{</span><span class="n">volume</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;bind&quot;</span><span class="p">:</span> <span class="s2">&quot;/mnt&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;rw&quot;</span><span class="p">}})</span>
+<div class="viewcode-block" id="submit_docker_job"><a class="viewcode-back" href="../../../_summary/container_collection.docker.submit_docker_job.html#container_collection.docker.submit_docker_job.submit_docker_job">[docs]</a><span class="k">def</span> <span class="nf">submit_docker_job</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">APIClient</span><span class="p">,</span> <span class="n">job_definition</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">volume_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Submit Docker job.</span>
 
-    <span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_container</span><span class="p">(</span><span class="o">**</span><span class="n">job_definition</span><span class="p">,</span> <span class="n">host_config</span><span class="o">=</span><span class="n">host_config</span><span class="p">)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    api_client</span>
+<span class="sd">        Docker API client.</span>
+<span class="sd">    job_definition</span>
+<span class="sd">        Docker job definition used to create job container.</span>
+<span class="sd">    volume_name</span>
+<span class="sd">        Name of the docker volume.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Container ID.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">host_config</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">create_host_config</span><span class="p">(</span><span class="n">binds</span><span class="o">=</span><span class="p">{</span><span class="n">volume_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;bind&quot;</span><span class="p">:</span> <span class="s2">&quot;/mnt&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;rw&quot;</span><span class="p">}})</span>
+
+    <span class="n">container</span> <span class="o">=</span> <span class="n">api_client</span><span class="o">.</span><span class="n">create_container</span><span class="p">(</span><span class="o">**</span><span class="n">job_definition</span><span class="p">,</span> <span class="n">host_config</span><span class="o">=</span><span class="n">host_config</span><span class="p">)</span>
     <span class="n">container_id</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Id&quot;</span><span class="p">)</span>
 
-    <span class="n">client</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container_id</span><span class="p">)</span>
+    <span class="n">api_client</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container_id</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">container_id</span></div>
 </pre></div>

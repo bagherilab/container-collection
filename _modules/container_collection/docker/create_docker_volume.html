@@ -239,15 +239,29 @@
         </div>
         <article role="main">
           <h1>Source code for container_collection.docker.create_docker_volume</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">docker</span>
+<span></span><span class="kn">from</span> <span class="nn">docker</span> <span class="kn">import</span> <span class="n">APIClient</span>
 
 
-<div class="viewcode-block" id="create_docker_volume"><a class="viewcode-back" href="../../../_summary/container_collection.docker.create_docker_volume.html#container_collection.docker.create_docker_volume.create_docker_volume">[docs]</a><span class="k">def</span> <span class="nf">create_docker_volume</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">docker</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">volumes</span><span class="o">.</span><span class="n">Volume</span><span class="p">:</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="o">.</span><span class="n">DockerClient</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;unix://var/run/docker.sock&quot;</span><span class="p">)</span>
-    <span class="n">volume</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">volumes</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<div class="viewcode-block" id="create_docker_volume"><a class="viewcode-back" href="../../../_summary/container_collection.docker.create_docker_volume.html#container_collection.docker.create_docker_volume.create_docker_volume">[docs]</a><span class="k">def</span> <span class="nf">create_docker_volume</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">APIClient</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a docker volume that copies content to specified path.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    api_client</span>
+<span class="sd">        Docker API client.</span>
+<span class="sd">    path</span>
+<span class="sd">        Local path for volume.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Created volume reference object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">api_client</span><span class="o">.</span><span class="n">create_volume</span><span class="p">(</span>
         <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="n">driver_opts</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">:</span> <span class="s2">&quot;bind&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">volume</span></div>
+    <span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

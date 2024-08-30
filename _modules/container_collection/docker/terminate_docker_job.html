@@ -239,12 +239,22 @@
         </div>
         <article role="main">
           <h1>Source code for container_collection.docker.terminate_docker_job</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">docker</span>
+<span></span><span class="kn">from</span> <span class="nn">docker</span> <span class="kn">import</span> <span class="n">APIClient</span>
 
 
-<div class="viewcode-block" id="terminate_docker_job"><a class="viewcode-back" href="../../../_summary/container_collection.docker.terminate_docker_job.html#container_collection.docker.terminate_docker_job.terminate_docker_job">[docs]</a><span class="k">def</span> <span class="nf">terminate_docker_job</span><span class="p">(</span><span class="n">container_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="o">.</span><span class="n">APIClient</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;unix://var/run/docker.sock&quot;</span><span class="p">)</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+<div class="viewcode-block" id="terminate_docker_job"><a class="viewcode-back" href="../../../_summary/container_collection.docker.terminate_docker_job.html#container_collection.docker.terminate_docker_job.terminate_docker_job">[docs]</a><span class="k">def</span> <span class="nf">terminate_docker_job</span><span class="p">(</span><span class="n">api_client</span><span class="p">:</span> <span class="n">APIClient</span><span class="p">,</span> <span class="n">container_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Terminate specific docker container.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    api_client</span>
+<span class="sd">        Docker API client.</span>
+<span class="sd">    container_id</span>
+<span class="sd">        ID of container to terminate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">api_client</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

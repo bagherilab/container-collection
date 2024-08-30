@@ -241,20 +241,40 @@
           <h1>Source code for container_collection.docker.run_docker_command</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">import</span> <span class="nn">docker</span>
+<span class="kn">from</span> <span class="nn">docker</span> <span class="kn">import</span> <span class="n">DockerClient</span>
 
 
 <div class="viewcode-block" id="run_docker_command"><a class="viewcode-back" href="../../../_summary/container_collection.docker.run_docker_command.html#container_collection.docker.run_docker_command.run_docker_command">[docs]</a><span class="k">def</span> <span class="nf">run_docker_command</span><span class="p">(</span>
+    <span class="n">client</span><span class="p">:</span> <span class="n">DockerClient</span><span class="p">,</span>
     <span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">command</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-    <span class="n">volume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">docker</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">volumes</span><span class="o">.</span><span class="n">Volume</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">volume_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">environment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">detach</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">environment</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">environment</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">environment</span>
-    <span class="n">volumes</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">volume</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="n">volume</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;bind&quot;</span><span class="p">:</span> <span class="s2">&quot;/mnt&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;rw&quot;</span><span class="p">}}</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run container from image with given command.</span>
 
-    <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="o">.</span><span class="n">DockerClient</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;unix://var/run/docker.sock&quot;</span><span class="p">)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    api_client</span>
+<span class="sd">        Docker API client.</span>
+<span class="sd">    image</span>
+<span class="sd">        Docker image.</span>
+<span class="sd">    command</span>
+<span class="sd">        Command list passed to container.</span>
+<span class="sd">    volume_name</span>
+<span class="sd">        Name of the docker volume.</span>
+<span class="sd">    environment</span>
+<span class="sd">        List of environment variables as strings.</span>
+<span class="sd">    detach</span>
+<span class="sd">        True to start container and immediately return the Container object,</span>
+<span class="sd">        False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">environment</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">environment</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">environment</span>
+    <span class="n">volumes</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">volume_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{</span><span class="n">volume_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;bind&quot;</span><span class="p">:</span> <span class="s2">&quot;/mnt&quot;</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;rw&quot;</span><span class="p">}}</span>
+
     <span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
         <span class="n">image</span><span class="p">,</span>
         <span class="n">command</span><span class="p">,</span>
