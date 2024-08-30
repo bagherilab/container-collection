@@ -1,23 +1,25 @@
 from typing import Union
-
-import docker
-import prefect
-from prefect.server.schemas.states import Failed, State
+from docker import APIClient
+from prefect.states import Failed, State
+from prefect.context import TaskRunContext
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
+"""Exit code used when task run retries exceed the maximum retries."""
 
 
-def check_docker_job(container_id: str, max_retries: int) -> Union[int, State]:
-    task_run = prefect.context.get_run_context().task_run  # type: ignore
+def check_docker_job(api_client: APIClient, container_id: str, max_retries: int) -> Union[int, State]:
+    context = TaskRunContext.get()
 
-    if task_run.run_count > max_retries:
+    if context is not None and context.task_run.run_count > max_retries:
         return RETRIES_EXCEEDED_EXIT_CODE
 
-    client = docker.APIClient(base_url="unix://var/run/docker.sock")
-    status = client.containers(all=True, filters={"id": container_id})[0]["State"]
+    status = api_client.containers(all=True, filters={"id": container_id})[0]["State"]
 
-    if status == "running":
+    # For jobs that are running, throw the appropriate exception.
+    if context is not None and status == "running":
         return Failed()
+    if status == "running":
+        raise RuntimeError("Job is in RUNNING state and does not have exit code.")
 
-    exitcode = client.wait(container_id, timeout=1)["StatusCode"]
+    exitcode = api_client.wait(container_id, timeout=1)["StatusCode"]
     return exitcode
