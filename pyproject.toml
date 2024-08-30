@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "container-collection"
-version = "0.6.1"
+version = "1.0.0"
 description = "Collection of tasks for running containerized models."
 authors = [
     "Jessica S. Yu <jesyu@uw.edu>"

@@ -1,3 +1,24 @@
+# [v1.0.0](https://github.com/bagherilab/container-collection/releases/tag/v1.0.0) - 2024-08-30
+
+> Compare with [v0.6.1](https://github.com/bagherilab/container-collection/compare/v0.6.1...v1.0.0)
+
+### Tests
+
+- Added tests for filter manifest files task by [@mychal98](https://github.com/mychal98) in [#29](https://github.com/bagherilab/container-collection/pull/29)
+- Add unit tests for container collection batch tasks by [@jessicasyu](https://github.com/jessicasyu) in [#64](https://github.com/bagherilab/container-collection/pull/64)
+- Add unit tests for container collection fargate tasks by [@jessicasyu](https://github.com/jessicasyu) in [#65](https://github.com/bagherilab/container-collection/pull/65)
+- Add unit tests for container collection docker tasks by [@jessicasyu](https://github.com/jessicasyu) in [#66](https://github.com/bagherilab/container-collection/pull/66)
+
+### Documentation
+
+- Add docstrings for template and manifest tasks by [@jessicasyu](https://github.com/jessicasyu) in [#63](https://github.com/bagherilab/container-collection/pull/63)
+
+### Admin
+
+- Fix release workflow by [@jessicasyu](https://github.com/jessicasyu) in [#60](https://github.com/bagherilab/container-collection/pull/60)
+- Update workflow action versions and badges by [@jessicasyu](https://github.com/jessicasyu) in [#61](https://github.com/bagherilab/container-collection/pull/61)
+- Bump dependency versions by [@jessicasyu](https://github.com/jessicasyu) in [#62](https://github.com/bagherilab/container-collection/pull/62)
+
 # [v0.6.1](https://github.com/bagherilab/container-collection/releases/tag/v0.6.1) - 2023-08-18
 
 > Compare with [v0.6.0](https://github.com/bagherilab/container-collection/compare/v0.6.0...v0.6.1)
