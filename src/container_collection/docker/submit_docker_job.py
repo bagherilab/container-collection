@@ -1,13 +1,30 @@
-import docker
+from docker import APIClient
 
 
-def submit_docker_job(job_definition: dict, volume: docker.models.volumes.Volume) -> str:
-    client = docker.APIClient(base_url="unix://var/run/docker.sock")
-    host_config = client.create_host_config(binds={volume.name: {"bind": "/mnt", "mode": "rw"}})
+def submit_docker_job(api_client: APIClient, job_definition: dict, volume_name: str) -> str:
+    """
+    Submit Docker job.
 
-    container = client.create_container(**job_definition, host_config=host_config)
+    Parameters
+    ----------
+    api_client
+        Docker API client.
+    job_definition
+        Docker job definition used to create job container.
+    volume_name
+        Name of the docker volume.
+
+    Returns
+    -------
+    :
+        Container ID.
+    """
+
+    host_config = api_client.create_host_config(binds={volume_name: {"bind": "/mnt", "mode": "rw"}})
+
+    container = api_client.create_container(**job_definition, host_config=host_config)
     container_id = container.get("Id")
 
-    client.start(container=container_id)
+    api_client.start(container=container_id)
 
     return container_id
