@@ -1,19 +1,39 @@
 from typing import Optional
 
-import docker
+from docker import DockerClient
 
 
 def run_docker_command(
+    client: DockerClient,
     image: str,
     command: list[str],
-    volume: Optional[docker.models.volumes.Volume] = None,
+    volume_name: Optional[str] = None,
     environment: Optional[list] = None,
     detach: bool = False,
 ) -> None:
-    environment = [] if environment is None else environment
-    volumes = {} if volume is None else {volume.name: {"bind": "/mnt", "mode": "rw"}}
+    """
+    Run container from image with given command.
 
-    client = docker.DockerClient(base_url="unix://var/run/docker.sock")
+    Parameters
+    ----------
+    api_client
+        Docker API client.
+    image
+        Docker image.
+    command
+        Command list passed to container.
+    volume_name
+        Name of the docker volume.
+    environment
+        List of environment variables as strings.
+    detach
+        True to start container and immediately return the Container object,
+        False otherwise.
+    """
+
+    environment = [] if environment is None else environment
+    volumes = {} if volume_name is None else {volume_name: {"bind": "/mnt", "mode": "rw"}}
+
     client.containers.run(
         image,
         command,
