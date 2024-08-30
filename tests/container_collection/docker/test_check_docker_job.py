@@ -1,145 +1,89 @@
 import os
-import sys
 import unittest
 from typing import Optional
 from unittest import mock
 
-import boto3
+from docker import APIClient
 from prefect import flow
 from prefect.exceptions import FailedRun
 from prefect.testing.utilities import prefect_test_harness
 
-from container_collection.batch import check_batch_job as check_batch_job_task
-from container_collection.batch.check_batch_job import RETRIES_EXCEEDED_EXIT_CODE, check_batch_job
+from container_collection.docker import check_docker_job as check_docker_job_task
+from container_collection.docker.check_docker_job import (
+    RETRIES_EXCEEDED_EXIT_CODE,
+    check_docker_job,
+)
 
 SUCCEEDED_EXIT_CODE = 0
 FAILED_EXIT_CODE = 1
 
 
-def make_describe_jobs_response(status: Optional[str], exit_code: Optional[int]):
-    if status is None:
-        return {"jobs": []}
-    if status in ("SUCCEEDED", "FAILED"):
-        return {"jobs": [{"status": status, "attempts": [{"container": {"exitCode": exit_code}}]}]}
-    return {"jobs": [{"status": status}]}
-
-
-def make_boto_mock(statuses: list[Optional[str]], exit_code: Optional[int] = None):
-    batch_mock = mock.MagicMock()
-    boto3_mock = mock.MagicMock(spec=boto3)
-    boto3_mock.client.return_value = batch_mock
-    batch_mock.describe_jobs.side_effect = [
-        make_describe_jobs_response(status, exit_code) for status in statuses
-    ]
-    return boto3_mock
+def make_client_mock(status: str, exit_code: Optional[int] = None):
+    client = mock.MagicMock(spec=APIClient)
+    client.containers.return_value = [{"State": status}]
+    client.wait.return_value = {"StatusCode": exit_code}
+    return client
 
 
 @flow
-def run_task_under_flow(max_retries: int):
-    return check_batch_job_task("job-arn", max_retries)
+def run_task_under_flow(client: APIClient, max_retries: int):
+    return check_docker_job_task(client, "container-id", max_retries)
 
 
 @mock.patch.dict(
     os.environ,
     {"PREFECT_LOGGING_LEVEL": "CRITICAL"},
 )
-class TestCheckBatchJob(unittest.TestCase):
+class TestCheckDockerJob(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         with prefect_test_harness():
             yield
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock(["RUNNING"]),
-    )
-    def test_check_batch_job_as_method_running_throws_exception(self):
+    def test_check_docker_job_as_method_running_throws_exception(self):
+        client = make_client_mock("running")
         with self.assertRaises(RuntimeError):
-            check_batch_job("job-arn", 0)
+            check_docker_job(client, "container-id", 0)
+            client.containers.assert_called_with(all=True, filters={"id": "container-id"})
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock([None, "PENDING", "RUNNING"]),
-    )
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"], "sleep", lambda _: None
-    )
-    def test_check_batch_job_as_method_running_with_waits_throws_exception(self):
-        with self.assertRaises(RuntimeError):
-            check_batch_job("job-arn", 0)
-
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock(["SUCCEEDED"], SUCCEEDED_EXIT_CODE),
-    )
-    def test_check_batch_job_as_method_succeeded(self):
-        exit_code = check_batch_job("job-arn", 0)
+    def test_check_docker_job_as_method_succeeded(self):
+        client = make_client_mock("exited", SUCCEEDED_EXIT_CODE)
+        exit_code = check_docker_job(client, "container-id", 0)
         self.assertEqual(SUCCEEDED_EXIT_CODE, exit_code)
+        client.containers.assert_called_with(all=True, filters={"id": "container-id"})
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock(["FAILED"], FAILED_EXIT_CODE),
-    )
-    def test_check_batch_job_as_method_failed(self):
-        exit_code = check_batch_job("job-arn", 0)
+    def test_check_docker_job_as_method_failed(self):
+        client = make_client_mock("exited", FAILED_EXIT_CODE)
+        exit_code = check_docker_job(client, "container-id", 0)
         self.assertEqual(FAILED_EXIT_CODE, exit_code)
+        client.containers.assert_called_with(all=True, filters={"id": "container-id"})
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock(["RUNNING"]),
-    )
-    def test_check_batch_job_as_task_running_below_max_retries_throws_failed_run(self):
+    def test_check_docker_job_as_task_running_below_max_retries_throws_failed_run(self):
+        client = make_client_mock("running")
         max_retries = 1
         with self.assertRaises(FailedRun):
-            run_task_under_flow(max_retries)
+            run_task_under_flow(client, max_retries)
+            client.containers.assert_called_with(all=True, filters={"id": "container-id"})
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock([None, "PENDING", "RUNNING"]),
-    )
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"], "sleep", lambda _: None
-    )
-    def test_check_batch_job_as_task_running_below_max_retries_with_waits_throws_failed_run(self):
-        max_retries = 1
-        with self.assertRaises(FailedRun):
-            run_task_under_flow(max_retries)
-
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock([None]),
-    )
-    def test_check_batch_job_as_task_max_retries_exceeded(self):
+    def test_check_docker_job_as_task_max_retries_exceeded(self):
+        client = make_client_mock("")
         max_retries = 0
-        exit_code = run_task_under_flow(max_retries)
+        exit_code = run_task_under_flow(client, max_retries)
         self.assertEqual(RETRIES_EXCEEDED_EXIT_CODE, exit_code)
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock(["SUCCEEDED"], SUCCEEDED_EXIT_CODE),
-    )
-    def test_check_batch_job_as_task_succeeded(self):
+    def test_check_docker_job_as_task_succeeded(self):
+        client = make_client_mock("exited", SUCCEEDED_EXIT_CODE)
         max_retries = 1
-        exit_code = run_task_under_flow(max_retries)
+        exit_code = run_task_under_flow(client, max_retries)
         self.assertEqual(SUCCEEDED_EXIT_CODE, exit_code)
+        client.containers.assert_called_with(all=True, filters={"id": "container-id"})
 
-    @mock.patch.object(
-        sys.modules["container_collection.batch.check_batch_job"],
-        "boto3",
-        make_boto_mock(["FAILED"], FAILED_EXIT_CODE),
-    )
-    def test_check_batch_job_as_task_failed(self):
+    def test_check_docker_job_as_task_failed(self):
+        client = make_client_mock("exited", FAILED_EXIT_CODE)
         max_retries = 1
-        exit_code = run_task_under_flow(max_retries)
+        exit_code = run_task_under_flow(client, max_retries)
         self.assertEqual(FAILED_EXIT_CODE, exit_code)
+        client.containers.assert_called_with(all=True, filters={"id": "container-id"})
 
 
 if __name__ == "__main__":
