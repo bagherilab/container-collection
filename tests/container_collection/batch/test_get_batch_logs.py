@@ -12,7 +12,7 @@ from container_collection.batch.get_batch_logs import LOG_GROUP_NAME, get_batch_
 ACCOUNT = "123123123123"
 REGION = "default-region"
 
-original_make_api_call = botocore.client.BaseClient._make_api_call
+original_make_api_call = botocore.client.BaseClient._make_api_call  # noqa: SLF001
 
 
 def mock_make_api_call(self, operation_name, kwarg):

@@ -1,22 +1,26 @@
-from typing import Optional
+from __future__ import annotations
 
-from docker import DockerClient
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from docker import DockerClient
 
 
 def run_docker_command(
     client: DockerClient,
     image: str,
     command: list[str],
-    volume_name: Optional[str] = None,
-    environment: Optional[list] = None,
-    detach: bool = False,
+    volume_name: str | None = None,
+    environment: list | None = None,
+    *,
+    detach: bool,
 ) -> None:
     """
     Run container from image with given command.
 
     Parameters
     ----------
-    api_client
+    client
         Docker API client.
     image
         Docker image.

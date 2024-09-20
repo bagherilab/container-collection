@@ -23,7 +23,7 @@ class TestUpdateManifestContents(unittest.TestCase):
             ["key_2", "extension_b", "s3://bucket-name", "full/file/key_2.extension_b"],
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
-        expected.reset_index(drop=True, inplace=True)
+        expected = expected.reset_index(drop=True)
         actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
@@ -51,7 +51,7 @@ class TestUpdateManifestContents(unittest.TestCase):
             ["key_6", "extension_b", "/local/path/", "full/file/key_6.extension_b"],
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
-        expected.reset_index(drop=True, inplace=True)
+        expected = expected.reset_index(drop=True)
         actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
@@ -78,7 +78,7 @@ class TestUpdateManifestContents(unittest.TestCase):
             ["key_1", "extension_a", "/local/path/", "full/file/key_1.extension_a"],
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
-        expected.reset_index(drop=True, inplace=True)
+        expected = expected.reset_index(drop=True)
         actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 
@@ -93,7 +93,7 @@ class TestUpdateManifestContents(unittest.TestCase):
             ["key_2", "extension_b", "s3://bucket-name", "key_2.extension_b"],
         ]
         expected = pd.DataFrame(contents, columns=self.columns)
-        expected.reset_index(drop=True, inplace=True)
+        expected = expected.reset_index(drop=True)
         actual = update_manifest_contents(location_keys)
         self.assertTrue(expected.equals(actual))
 

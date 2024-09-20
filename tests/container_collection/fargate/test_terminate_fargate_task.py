@@ -17,7 +17,7 @@ class TestTerminateFargateTask(unittest.TestCase):
         return_value=mock.MagicMock(spec=boto3),
     )
     @mock.patch.object(
-        sys.modules["container_collection.fargate.terminate_fargate_task"], "sleep", lambda _: None
+        sys.modules["container_collection.fargate.terminate_fargate_task"], "sleep", mock.Mock()
     )
     def test_terminate_fargate_task(self, boto3_mock):
         ecs_mock = mock.MagicMock()

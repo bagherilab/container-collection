@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 
 def make_batch_job(
@@ -6,8 +6,8 @@ def make_batch_job(
     image: str,
     vcpus: int,
     memory: int,
-    environment: Optional[list[dict[str, str]]] = None,
-    job_role_arn: Optional[str] = None,
+    environment: list[dict[str, str]] | None = None,
+    job_role_arn: str | None = None,
 ) -> dict:
     """
     Create batch job definition.

@@ -1,4 +1,4 @@
-from typing import Any
+from __future__ import annotations
 
 import boto3
 
@@ -9,7 +9,7 @@ def submit_batch_job(
     user: str,
     queue: str,
     size: int,
-    **kwargs: Any,
+    **kwargs: list | str | int | bool | dict,
 ) -> list[str]:
     """
     Submit AWS Batch job.
@@ -44,7 +44,7 @@ def submit_batch_job(
     }
 
     if size > 1:
-        default_job_submission["arrayProperties"] = {"size": size}  # type: ignore
+        default_job_submission["arrayProperties"] = {"size": size}  # type: ignore[assignment]
 
     client = boto3.client("batch")
     job_submission = default_job_submission | kwargs

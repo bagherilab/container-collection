@@ -1,7 +1,7 @@
-from typing import Optional
+from __future__ import annotations
 
 
-def make_docker_job(name: str, image: str, environment: Optional[list[str]] = None) -> dict:
+def make_docker_job(name: str, image: str, environment: list[str] | None = None) -> dict:
     """
     Create docker job definition.
 

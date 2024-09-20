@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import os
 import sys
 import unittest
-from typing import Optional
 from unittest import mock
 
 import boto3
@@ -19,7 +20,7 @@ SUCCEEDED_EXIT_CODE = 0
 FAILED_EXIT_CODE = 1
 
 
-def make_describe_tasks_response(status: Optional[str], exit_code: Optional[int]):
+def make_describe_tasks_response(status: str | None, exit_code: int | None):
     if status is None:
         return {"tasks": []}
     if status == "STOPPED":
@@ -27,7 +28,7 @@ def make_describe_tasks_response(status: Optional[str], exit_code: Optional[int]
     return {"tasks": [{"lastStatus": status}]}
 
 
-def make_boto_mock(statuses: list[Optional[str]], exit_code: Optional[int] = None):
+def make_boto_mock(statuses: list[str | None], exit_code: int | None = None):
     ecs_mock = mock.MagicMock()
     boto3_mock = mock.MagicMock(spec=boto3)
     boto3_mock.client.return_value = ecs_mock
@@ -67,7 +68,7 @@ class TestCheckFargateTask(unittest.TestCase):
         make_boto_mock([None, "PENDING", "RUNNING"]),
     )
     @mock.patch.object(
-        sys.modules["container_collection.fargate.check_fargate_task"], "sleep", lambda _: None
+        sys.modules["container_collection.fargate.check_fargate_task"], "sleep", mock.Mock()
     )
     def test_check_fargate_task_as_method_running_with_waits_throws_exception(self):
         with self.assertRaises(RuntimeError):
@@ -107,7 +108,7 @@ class TestCheckFargateTask(unittest.TestCase):
         make_boto_mock([None, "PENDING", "RUNNING"]),
     )
     @mock.patch.object(
-        sys.modules["container_collection.fargate.check_fargate_task"], "sleep", lambda _: None
+        sys.modules["container_collection.fargate.check_fargate_task"], "sleep", mock.Mock()
     )
     def test_check_fargate_task_as_task_running_below_max_retries_with_waits_throws_failed_run(
         self,

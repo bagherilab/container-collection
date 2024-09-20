@@ -13,7 +13,7 @@ class TestRunDockerCommand(unittest.TestCase):
         image = "jobimage:latest"
         command = ["command", "string"]
 
-        run_docker_command(client, image, command)
+        run_docker_command(client, image, command, detach=False)
 
         client.containers.run.assert_called_with(
             image, command, environment=[], volumes={}, auto_remove=True, detach=False
