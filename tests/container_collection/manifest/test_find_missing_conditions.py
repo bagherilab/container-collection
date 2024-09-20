@@ -6,7 +6,7 @@ from container_collection.manifest.find_missing_conditions import find_missing_c
 
 
 class TestFindMissingConditions(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.name = "name"
         self.seeds = [0, 1, 2]
         self.conditions_no_attributes = [{"key": "key_A"}, {"key": "key_B"}, {"key": "key_C"}]

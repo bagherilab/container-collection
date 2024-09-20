@@ -6,7 +6,7 @@ from container_collection.manifest.filter_manifest_files import filter_manifest_
 
 
 class TestFilterManifestFiles(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.extensions = ["extension_a", "extension_b"]
         self.manifest_columns = ["KEY", "EXTENSION", "LOCATION", "FULL_KEY"]
 

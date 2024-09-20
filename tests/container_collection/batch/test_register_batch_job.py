@@ -20,7 +20,7 @@ REGION = "default-region"
     },
 )
 class TestRegisterBatchJob(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.name = "job-definition-name"
         self.image = "jobimage:latest"
         self.vcpus = 1

@@ -23,7 +23,7 @@ COMPUTE = "compute-environment-name"
     },
 )
 class TestSubmitBatchJob(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.job_definition = {
             "jobDefinitionName": "job-definition-name",
             "type": "container",
@@ -79,7 +79,7 @@ class TestSubmitBatchJob(unittest.TestCase):
             self.assertEqual(self.job_definition_arn, jobs["jobs"][index]["jobDefinition"])
 
 
-def initialize_infrastructure() -> None:
+def initialize_infrastructure():
     # Create clients.
     ec2_client = boto3.client("ec2")
     iam_client = boto3.client("iam")

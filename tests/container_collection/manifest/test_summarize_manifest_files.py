@@ -7,7 +7,7 @@ from container_collection.manifest.summarize_manifest_files import summarize_man
 
 
 class TestSummarizeManifestFiles(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.name = "name"
         self.seeds = [0, 1, 2, 3]
         self.conditions = [{"key": "key_A"}, {"key": "key_B"}, {"key": "key_C"}]

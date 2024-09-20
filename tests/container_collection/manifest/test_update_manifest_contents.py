@@ -6,7 +6,7 @@ from container_collection.manifest.update_manifest_contents import update_manife
 
 
 class TestUpdateManifestContents(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.columns = ["KEY", "EXTENSION", "LOCATION", "FULL_KEY"]
 
     def test_update_manifest_contents_single_location_populated_key_list(self):

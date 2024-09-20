@@ -20,7 +20,7 @@ REGION = "default-region"
     },
 )
 class TestRegisterFargateTask(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.name = "task-definition-name"
         self.image = "jobimage:latest"
         self.vcpus = "1"

@@ -39,7 +39,7 @@ def mock_make_api_call(self, operation_name, kwarg):
     },
 )
 class TestGetBatchLogs(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         self.job_arn = "job-arn"
         self.log_stream_name = f"{self.job_arn}-log-stream-name"
 
