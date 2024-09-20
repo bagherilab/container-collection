@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from time import sleep
-from typing import Union
 
 import boto3
 from prefect.context import TaskRunContext
@@ -9,7 +10,7 @@ RETRIES_EXCEEDED_EXIT_CODE = 80
 """Exit code used when task run retries exceed the maximum retries."""
 
 
-def check_batch_job(job_arn: str, max_retries: int) -> Union[int, State, bool]:
+def check_batch_job(job_arn: str, max_retries: int) -> int | State | bool:
     """
     Check for exit code of an AWS Batch job.
 
@@ -60,7 +61,7 @@ def check_batch_job(job_arn: str, max_retries: int) -> Union[int, State, bool]:
     if context is not None and status == "RUNNING":
         return Failed()
     if status == "RUNNING":
-        raise RuntimeError("Job is in RUNNING state and does not have exit code.")
+        message = "Job is in RUNNING state and does not have exit code."
+        raise RuntimeError(message)
 
-    exitcode = response[0]["attempts"][0]["container"]["exitCode"]
-    return exitcode
+    return response[0]["attempts"][0]["container"]["exitCode"]

@@ -14,7 +14,7 @@ class TestTerminateBatchJob(unittest.TestCase):
         return_value=mock.MagicMock(spec=boto3),
     )
     @mock.patch.object(
-        sys.modules["container_collection.batch.terminate_batch_job"], "sleep", lambda _: None
+        sys.modules["container_collection.batch.terminate_batch_job"], "sleep", mock.Mock()
     )
     def test_terminate_batch_job(self, boto3_mock):
         batch_mock = mock.MagicMock()

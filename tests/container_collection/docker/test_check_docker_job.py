@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import os
 import unittest
-from typing import Optional
 from unittest import mock
 
 from docker import APIClient
@@ -18,7 +19,7 @@ SUCCEEDED_EXIT_CODE = 0
 FAILED_EXIT_CODE = 1
 
 
-def make_client_mock(status: str, exit_code: Optional[int] = None):
+def make_client_mock(status: str, exit_code: int | None = None):
     client = mock.MagicMock(spec=APIClient)
     client.containers.return_value = [{"State": status}]
     client.wait.return_value = {"StatusCode": exit_code}

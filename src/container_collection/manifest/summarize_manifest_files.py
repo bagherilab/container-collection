@@ -68,7 +68,7 @@ def summarize_manifest_files(
         elif key in condition_keys:
             summary.loc[key, extension] = "✓"
 
-    summary.dropna(axis=1, how="all", inplace=True)
-    summary.fillna("", inplace=True)
+    summary = summary.dropna(axis=1, how="all")
+    summary = summary.fillna("")
 
     return tabulate(summary, headers="keys", tablefmt="mixed_outline")

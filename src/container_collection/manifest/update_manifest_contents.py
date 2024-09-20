@@ -28,10 +28,8 @@ def update_manifest_contents(location_keys: dict) -> pd.DataFrame:
         return pd.DataFrame(columns=["KEY", "EXTENSION", "LOCATION", "FULL_KEY"])
 
     manifest = pd.concat(all_manifests)
-    manifest.sort_values(by=["EXTENSION", "KEY"], inplace=True)
-    manifest.reset_index(drop=True, inplace=True)
-
-    return manifest
+    manifest = manifest.sort_values(by=["EXTENSION", "KEY"])
+    return manifest.reset_index(drop=True)
 
 
 def make_file_manifest(location: str, keys: list[str]) -> pd.DataFrame:
@@ -58,6 +56,4 @@ def make_file_manifest(location: str, keys: list[str]) -> pd.DataFrame:
         extension = ".".join(os.path.split(key)[1].split(".")[1:])
         contents.append((short_key, extension, location, key))
 
-    manifest = pd.DataFrame(contents, columns=["KEY", "EXTENSION", "LOCATION", "FULL_KEY"])
-
-    return manifest
+    return pd.DataFrame(contents, columns=["KEY", "EXTENSION", "LOCATION", "FULL_KEY"])

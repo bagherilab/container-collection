@@ -38,7 +38,7 @@ def filter_manifest_files(
 
 def filter_incomplete_extensions(manifest: pd.DataFrame, extensions: list[str]) -> pd.DataFrame:
     """
-    Filters manifest for files with incomplete set of extensions.
+    Filter manifest for files with incomplete set of extensions.
 
     Parameters
     ----------
@@ -53,10 +53,7 @@ def filter_incomplete_extensions(manifest: pd.DataFrame, extensions: list[str]) 
         Filtered manifest of file keys, extensions, and locations.
     """
 
-    filtered = manifest.groupby("KEY").filter(
-        lambda x: len(set(extensions) - set(x["EXTENSION"])) == 0
-    )
-    return filtered
+    return manifest.groupby("KEY").filter(lambda x: len(set(extensions) - set(x["EXTENSION"])) == 0)
 
 
 def convert_to_dictionary(manifest: pd.DataFrame) -> dict:

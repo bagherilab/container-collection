@@ -1,16 +1,18 @@
-from typing import Union
+from __future__ import annotations
 
-from docker import APIClient
+from typing import TYPE_CHECKING
+
 from prefect.context import TaskRunContext
 from prefect.states import Failed, State
+
+if TYPE_CHECKING:
+    from docker import APIClient
 
 RETRIES_EXCEEDED_EXIT_CODE = 80
 """Exit code used when task run retries exceed the maximum retries."""
 
 
-def check_docker_job(
-    api_client: APIClient, container_id: str, max_retries: int
-) -> Union[int, State]:
+def check_docker_job(api_client: APIClient, container_id: str, max_retries: int) -> int | State:
     """
     Check for exit code of a Docker container.
 
@@ -49,7 +51,7 @@ def check_docker_job(
     if context is not None and status == "running":
         return Failed()
     if status == "running":
-        raise RuntimeError("Job is in RUNNING state and does not have exit code.")
+        message = "Job is in RUNNING state and does not have exit code."
+        raise RuntimeError(message)
 
-    exitcode = api_client.wait(container_id, timeout=1)["StatusCode"]
-    return exitcode
+    return api_client.wait(container_id, timeout=1)["StatusCode"]

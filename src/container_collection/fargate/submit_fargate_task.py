@@ -1,4 +1,4 @@
-from typing import Any
+from __future__ import annotations
 
 import boto3
 
@@ -11,7 +11,7 @@ def submit_fargate_task(
     security_groups: list[str],
     subnets: list[str],
     command: list[str],
-    **kwargs: Any,
+    **kwargs: list | str | int | bool | dict,
 ) -> list[str]:
     """
     Submit task to AWS Fargate.

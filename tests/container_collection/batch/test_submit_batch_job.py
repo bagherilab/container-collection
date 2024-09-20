@@ -11,6 +11,7 @@ from container_collection.batch.submit_batch_job import submit_batch_job
 ACCOUNT = "123123123123"
 REGION = "default-region"
 QUEUE = "queue-name"
+COMPUTE = "compute-environment-name"
 
 
 @mock.patch.dict(
@@ -127,7 +128,7 @@ def initialize_infrastructure() -> None:
 
     # Create compute environment.
     batch_client.create_compute_environment(
-        computeEnvironmentName="compute-environment-name",
+        computeEnvironmentName=COMPUTE,
         type="MANAGED",
         serviceRole=f"arn:aws:iam::{ACCOUNT}:role/batch-service-role",
         computeResources={
@@ -142,6 +143,7 @@ def initialize_infrastructure() -> None:
     )
 
     # Create job queue.
+    arn_prefix = f"arn:aws:batch:{REGION}:{ACCOUNT}"
     batch_client.create_job_queue(
         jobQueueName=QUEUE,
         state="ENABLED",
@@ -149,7 +151,7 @@ def initialize_infrastructure() -> None:
         computeEnvironmentOrder=[
             {
                 "order": 1,
-                "computeEnvironment": f"arn:aws:batch:{REGION}:{ACCOUNT}:compute-environment/compute-environment-name",
+                "computeEnvironment": f"{arn_prefix}:compute-environment/{COMPUTE}",
             },
         ],
     )
