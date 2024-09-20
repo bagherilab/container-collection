@@ -239,7 +239,7 @@
         </div>
         <article role="main">
           <h1>Source code for container_collection.batch.make_batch_job</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 
 <div class="viewcode-block" id="make_batch_job"><a class="viewcode-back" href="../../../_summary/container_collection.batch.make_batch_job.html#container_collection.batch.make_batch_job.make_batch_job">[docs]</a><span class="k">def</span> <span class="nf">make_batch_job</span><span class="p">(</span>
@@ -247,8 +247,8 @@
     <span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">vcpus</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">memory</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">environment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">job_role_arn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">environment</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_role_arn</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create batch job definition.</span>
