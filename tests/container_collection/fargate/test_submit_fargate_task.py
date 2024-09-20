@@ -21,7 +21,7 @@ CLUSTER = "cluster-name"
     },
 )
 class TestSubmitFargateTask(unittest.TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         # Note that the memory specified in the container definition is not
         # actually required for Fargate, but is used in the moto library to
         # determine resource requirements.
@@ -80,7 +80,7 @@ class TestSubmitFargateTask(unittest.TestCase):
         self.assertEqual(self.task_definition_arn, task["taskDefinitionArn"])
 
 
-def initialize_infrastructure() -> None:
+def initialize_infrastructure():
     # Create clients.
     ec2_client = boto3.client("ec2")
     ecs_client = boto3.client("ecs")
