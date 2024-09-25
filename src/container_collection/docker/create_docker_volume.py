@@ -1,7 +1,7 @@
 from docker import APIClient
 
 
-def create_docker_volume(api_client: APIClient, path: str) -> dict:
+def create_docker_volume(api_client: APIClient, path: str) -> str:
     """
     Create a docker volume that copies content to specified path.
 
@@ -15,9 +15,9 @@ def create_docker_volume(api_client: APIClient, path: str) -> dict:
     Returns
     -------
     :
-        Created volume reference object.
+        Created volume name.
     """
 
     return api_client.create_volume(
         driver="local", driver_opts={"type": "none", "device": path, "o": "bind"}
-    )
+    )["Name"]
