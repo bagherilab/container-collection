@@ -1,4 +1,3 @@
-import secrets
 import unittest
 from unittest import mock
 
@@ -27,18 +26,18 @@ class TestRunDockerCommand(unittest.TestCase):
             "ENVIRONMENT_VARIABLE_A=X",
             "ENVIRONMENT_VARIABLE_B=Y",
         ]
-        volume_name = secrets.token_hex(32)
+        volume = "volume-name"
         detach = True
 
         run_docker_command(
-            client, image, command, environment=environment, volume_name=volume_name, detach=detach
+            client, image, command, environment=environment, volume=volume, detach=detach
         )
 
         client.containers.run.assert_called_with(
             image,
             command,
             environment=environment,
-            volumes={volume_name: {"bind": "/mnt", "mode": "rw"}},
+            volumes={volume: {"bind": "/mnt", "mode": "rw"}},
             auto_remove=True,
             detach=detach,
         )
