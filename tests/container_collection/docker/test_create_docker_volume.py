@@ -1,5 +1,3 @@
-import datetime
-import secrets
 import unittest
 from unittest import mock
 
@@ -8,30 +6,19 @@ from docker import APIClient
 from container_collection.docker.create_docker_volume import create_docker_volume
 
 
-def mock_create_volume(**kwargs):
-    name = kwargs.get("name", secrets.token_hex(32))
-    return {
-        "CreatedAt": datetime.datetime.now().astimezone().replace(microsecond=0).isoformat(),
-        "Driver": kwargs.get("driver", "local"),
-        "Labels": kwargs.get("labels", {"com.docker.volume.anonymous": ""}),
-        "Mountpoint": f"/var/lib/docker/volumes/{name}/_data",
-        "Name": name,
-        "Options": kwargs.get("driver_opts", None),
-        "Scope": "local",
-    }
-
-
 class TestCreateDockerVolume(unittest.TestCase):
     def test_create_docker_volume(self):
+        expected_volume = "volume-name"
         client = mock.MagicMock(spec=APIClient)
-        client.create_volume.side_effect = mock_create_volume
+        client.create_volume.return_value = {"Name": expected_volume}
         path = "/docker/volume/path"
 
         volume = create_docker_volume(client, path)
 
-        self.assertEqual(path, volume["Options"]["device"])
-        self.assertEqual("none", volume["Options"]["type"])
-        self.assertEqual("bind", volume["Options"]["o"])
+        client.create_volume.assert_called_with(
+            driver="local", driver_opts={"type": "none", "device": path, "o": "bind"}
+        )
+        self.assertEqual(expected_volume, volume)
 
 
 if __name__ == "__main__":

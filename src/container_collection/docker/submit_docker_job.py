@@ -1,7 +1,7 @@
 from docker import APIClient
 
 
-def submit_docker_job(api_client: APIClient, job_definition: dict, volume_name: str) -> str:
+def submit_docker_job(api_client: APIClient, job_definition: dict, volume: str) -> str:
     """
     Submit Docker job.
 
@@ -11,7 +11,7 @@ def submit_docker_job(api_client: APIClient, job_definition: dict, volume_name: 
         Docker API client.
     job_definition
         Docker job definition used to create job container.
-    volume_name
+    volume
         Name of the docker volume.
 
     Returns
@@ -20,7 +20,7 @@ def submit_docker_job(api_client: APIClient, job_definition: dict, volume_name: 
         Container ID.
     """
 
-    host_config = api_client.create_host_config(binds={volume_name: {"bind": "/mnt", "mode": "rw"}})
+    host_config = api_client.create_host_config(binds={volume: {"bind": "/mnt", "mode": "rw"}})
 
     container = api_client.create_container(**job_definition, host_config=host_config)
     container_id = container.get("Id")

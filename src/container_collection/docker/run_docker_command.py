@@ -10,7 +10,7 @@ def run_docker_command(
     client: DockerClient,
     image: str,
     command: list[str],
-    volume_name: str | None = None,
+    volume: str | None = None,
     environment: list | None = None,
     *,
     detach: bool,
@@ -26,7 +26,7 @@ def run_docker_command(
         Docker image.
     command
         Command list passed to container.
-    volume_name
+    volume
         Name of the docker volume.
     environment
         List of environment variables as strings.
@@ -36,7 +36,7 @@ def run_docker_command(
     """
 
     environment = [] if environment is None else environment
-    volumes = {} if volume_name is None else {volume_name: {"bind": "/mnt", "mode": "rw"}}
+    volumes = {} if volume is None else {volume: {"bind": "/mnt", "mode": "rw"}}
 
     client.containers.run(
         image,

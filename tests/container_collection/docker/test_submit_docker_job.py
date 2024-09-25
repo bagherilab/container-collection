@@ -1,4 +1,3 @@
-import secrets
 import unittest
 from unittest import mock
 
@@ -24,16 +23,16 @@ def mock_create_host_config(**kwargs):
 
 class TestSubmitDockerJob(unittest.TestCase):
     def test_submit_docker_job(self):
-        container_id = secrets.token_hex(32)
+        container_id = "container-id"
         client = mock.MagicMock(spec=APIClient)
         client.create_host_config.side_effect = mock_create_host_config
         client.create_container.return_value = {"Id": container_id, "Warnings": []}
 
         name = "job-definition-name"
         image = "jobimage:latest"
-        volume_name = secrets.token_hex(32)
+        volume = "volume-name"
 
-        host_config = {"NetworkMode": "default", "Binds": [f"{volume_name}:/mnt:rw"]}
+        host_config = {"NetworkMode": "default", "Binds": [f"{volume}:/mnt:rw"]}
 
         job_definition = {
             "image": image,
@@ -45,7 +44,7 @@ class TestSubmitDockerJob(unittest.TestCase):
             ],
         }
 
-        submit_docker_job(client, job_definition, volume_name)
+        submit_docker_job(client, job_definition, volume)
 
         client.create_container.assert_called_with(**job_definition, host_config=host_config)
         client.start.assert_called_with(container=container_id)
