@@ -1,3 +1,16 @@
+# [v1.1.0](https://github.com/bagherilab/container-collection/releases/tag/v1.1.0) - 2024-09-25
+
+> Compare with [v1.0.0](https://github.com/bagherilab/container-collection/compare/v1.0.0...v1.1.0)
+
+### Features
+
+- Change create docker volume task return to volume name by [@jessicasyu](https://github.com/jessicasyu) in [#70](https://github.com/bagherilab/container-collection/pull/70)
+
+### Admin
+
+- Add Python 3.11 to workflows and apply ruff linting by [@jessicasyu](https://github.com/jessicasyu) in [#68](https://github.com/bagherilab/container-collection/pull/68)
+- Bump dependency versions and clean up type hinting by [@jessicasyu](https://github.com/jessicasyu) in [#69](https://github.com/bagherilab/container-collection/pull/69)
+
 # [v1.0.0](https://github.com/bagherilab/container-collection/releases/tag/v1.0.0) - 2024-08-30
 
 > Compare with [v0.6.1](https://github.com/bagherilab/container-collection/compare/v0.6.1...v1.0.0)
