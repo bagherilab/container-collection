@@ -12,6 +12,18 @@ REGION = "default-region"
 CLUSTER = "cluster-name"
 
 
+def _patch_moto_private_dns_name():
+    # Moto ECS expects ENIs to have a private_dns_name attribute.
+    # Some Moto versions don't define it on the EC2 NetworkInterface model.
+    # This helper makes a private_dns_name attribute if the EC2 NetworkInterface model doesn't define one.
+    from moto.ec2.models.elastic_network_interfaces import NetworkInterface
+
+    if not hasattr(NetworkInterface, "private_dns_name"):
+        NetworkInterface.private_dns_name = property(
+            lambda self: f"ip-{self.private_ip_address.replace('.', '-')}.ec2.internal"
+        )
+
+
 @mock.patch.dict(
     os.environ,
     {
@@ -45,6 +57,8 @@ class TestSubmitFargateTask(unittest.TestCase):
 
     @mock_aws
     def test_submit_fargate_task(self):
+        _patch_moto_private_dns_name()
+
         name = "task-name"
         user = "user"
         command = ["command", "string"]

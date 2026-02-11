@@ -9,7 +9,7 @@ license = "BSD-3-Clause"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9.2,<4.0.0"
 prefect = "^2.8.2"
 boto3 = "^1.24.59"
 numpy = "^1.24.2"
@@ -32,7 +32,7 @@ myst-parser = "^2.0.0"
 sphinx-copybutton = "^0.5.2"
 tox = "^4.5.1"
 ruff = "^0.6.3"
-moto = {extras = ["ec2", "batch", "logs"], version = "^5.0.11"}
+moto = "^5.1.21"
 
 [tool.isort]
 profile = "black"
